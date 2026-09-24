@@ -1,0 +1,18 @@
+/*
+Theme Name:        Vistula Travel
+Theme URI:         https://github.com/Artem23334/vistula-travel
+Author:             Artem23334
+Description:       WordPress-first theme for Vistula Travel — a Polish tourism company site (tours, destinations, travel guide). Presentation layer only; all business data comes from the vistula-core plugin. See docs/project-architecture.md.
+Version:            0.1.0
+Requires at least:  6.5
+Requires PHP:       8.2
+Tested up to:       7.0
+License:            GPL-2.0-or-later
+License URI:        https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain:        vistula-travel
+
+This is a classic PHP theme (not a block/FSE theme) — see docs/project-architecture.md §3.4.
+Visual design tokens and component styles are intentionally NOT here yet — see Stage 4
+(Design System) in docs/implementation-roadmap.md. This file exists so WordPress recognizes
+the theme; it is enqueued as-is by inc/enqueue.php.
+*/

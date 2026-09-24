@@ -1,0 +1,50 @@
+# --- WordPress core (not tracked — installed per environment, per architecture §19.1) ---
+/wp-admin/
+/wp-includes/
+/wp-*.php
+!/wp-content/
+/xmlrpc.php
+/index.php
+/license.txt
+/readme.html
+/wp-config.php
+
+# --- Secrets / environment ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# --- Database ---
+*.sql
+*.sql.gz
+
+# --- Uploads / generated media (not tracked per architecture §19.1) ---
+/wp-content/uploads/
+
+# --- Third-party plugins/themes not authored in this repo ---
+/wp-content/plugins/*
+!/wp-content/plugins/vistula-core/
+/wp-content/themes/*
+!/wp-content/themes/vistula-travel/
+/wp-content/upgrade/
+/wp-content/cache/
+
+# --- Node / tooling ---
+node_modules/
+npm-debug.log*
+
+# --- OS / editor cruft ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# --- Logs ---
+*.log
+debug.log
+
+# --- Local mail-catcher data, if any is written to disk ---
+/mailcatcher/
