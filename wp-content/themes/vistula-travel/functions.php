@@ -21,5 +21,6 @@ define( 'VISTULA_TRAVEL_URI', get_template_directory_uri() );
  * Everything the theme actually does lives in /inc.
  * Add new includes here as later stages add them (e.g. inc/template-tags.php).
  */
+require VISTULA_TRAVEL_DIR . '/inc/plugin-dependency.php';
 require VISTULA_TRAVEL_DIR . '/inc/setup.php';
 require VISTULA_TRAVEL_DIR . '/inc/enqueue.php';

@@ -14,10 +14,13 @@
  * Foundation only. Does NOT yet register the Tour/Destination CPTs, taxonomies,
  * settings page, or any content model — those are later stages in
  * docs/implementation-roadmap.md (Stage 3 Global Settings, Stage 5 Tours CMS,
- * Stage 8 Destinations, ...). This file only establishes safe loading and the
+ * Stage 8 Destinations, ...). This file establishes safe loading, the
  * data-access contract functions so the theme has something real to call
  * without being coupled to a field framework or raw get_option() calls
- * (docs/project-architecture.md §3.3, rule 2).
+ * (docs/project-architecture.md §3.3, rule 2), the Local JSON integration
+ * point for the field framework decided in TD-12 (Secure Custom Fields —
+ * no field groups exist yet), and the Stage 2 content-policy baseline
+ * (TD-41: comments disabled, author/tag archives noindex).
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -67,6 +70,16 @@ function vistula_core_init(): void {
 	require_once VISTULA_CORE_DIR . 'src/Api/settings.php';
 	require_once VISTULA_CORE_DIR . 'src/Api/page-roles.php';
 	require_once VISTULA_CORE_DIR . 'src/Api/tours.php';
+	require_once VISTULA_CORE_DIR . 'src/Api/destinations.php';
+	require_once VISTULA_CORE_DIR . 'src/Api/translation.php';
+
+	// Field-framework integration (TD-12) — defines no fields, only wires
+	// where future field-group definitions will save to/load from.
+	require_once VISTULA_CORE_DIR . 'src/Fields/json-sync.php';
+
+	// Stage 2 content-policy baseline (TD-41) — comments off, noindex on
+	// author/tag archives. A business rule, so it lives here, not in the theme.
+	require_once VISTULA_CORE_DIR . 'src/Content/comments-and-archives.php';
 
 	// Nothing else is registered yet: no CPTs, no taxonomies, no settings
 	// page, no query builders. Those hook in here in later stages without

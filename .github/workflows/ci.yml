@@ -1,0 +1,52 @@
+name: CI
+
+# Stage 2 scope only (TD-44: "Stage 2 → 16"): PHP lint + PHPCS/WPCS.
+# PHPUnit, Playwright, axe and Lighthouse CI are added later, once there is
+# runtime behaviour worth testing (CPTs, templates with real data) — adding
+# them now would test nothing but empty stubs.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lint-and-standards:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version: ['8.2', '8.3']
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up PHP ${{ matrix.php-version }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          coverage: none
+          tools: composer
+
+      - name: Install Composer dependencies
+        run: composer install --no-progress --prefer-dist
+
+      - name: PHP syntax check (php -l)
+        run: composer run lint
+
+      - name: PHPCS (WordPress Coding Standards)
+        run: composer run cs
+
+  secret-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Basic secret-pattern scan
+        run: |
+          if grep -rniE "password[[:space:]]*=[[:space:]]*['\"][^'\"]+['\"]|api[_-]?key[[:space:]]*=[[:space:]]*['\"][^'\"]+['\"]|BEGIN (RSA|EC|OPENSSH) PRIVATE KEY" \
+            --exclude-dir=.git .; then
+            echo "::error::Possible secret found — see matches above."
+            exit 1
+          fi
+          echo "No obvious secrets found."

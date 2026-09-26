@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<ruleset name="Vistula Travel">
+	<description>WordPress Coding Standards for the vistula-travel theme and vistula-core plugin.</description>
+
+	<file>./wp-content/themes/vistula-travel</file>
+	<file>./wp-content/plugins/vistula-core</file>
+
+	<arg name="extensions" value="php"/>
+	<arg name="colors"/>
+	<arg value="sp"/>
+
+	<!-- Minimum supported PHP version, per docs/project-architecture.md (target 8.3, minimum 8.2). -->
+	<config name="testVersion" value="8.2-"/>
+
+	<rule ref="WordPress">
+		<!-- Text-domain check is enforced per-file below instead, since the
+		     theme (vistula-travel) and plugin (vistula-core) intentionally
+		     use two different text domains — see docs/project-architecture.md §3.2. -->
+		<exclude name="WordPress.WP.I18n.MissingArgDomain"/>
+	</rule>
+
+	<rule ref="PHPCompatibilityWP"/>
+
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="vistula-travel"/>
+				<element value="vistula-core"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- Both packages declare their own text domain in their own header comment. -->
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="vistula"/>
+			</property>
+		</properties>
+	</rule>
+</ruleset>

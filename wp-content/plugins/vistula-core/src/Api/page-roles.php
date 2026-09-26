@@ -39,6 +39,20 @@ if ( ! defined( 'VISTULA_PAGE_ROLES' ) ) {
 	);
 }
 
+if ( ! function_exists( 'vistula_is_valid_page_role' ) ) {
+	/**
+	 * Whether $role is a known page role. This is the "mechanism" part of
+	 * the registry — it lets callers (and vistula_page_url() itself) fail
+	 * loudly on a typo'd role instead of silently returning a dead link.
+	 *
+	 * @param string $role Role to check.
+	 * @return bool
+	 */
+	function vistula_is_valid_page_role( string $role ): bool {
+		return in_array( $role, VISTULA_PAGE_ROLES, true );
+	}
+}
+
 if ( ! function_exists( 'vistula_page_url' ) ) {
 	/**
 	 * Resolve a page role (e.g. 'contact') to its URL.
@@ -48,7 +62,20 @@ if ( ! function_exists( 'vistula_page_url' ) ) {
 	 * @return string
 	 */
 	function vistula_page_url( string $role, string $default = '#' ): string {
-		// TODO(Stage 3): resolve $role to a real Page ID via the registry
+		if ( ! vistula_is_valid_page_role( $role ) ) {
+			_doing_it_wrong(
+				__FUNCTION__,
+				sprintf(
+					/* translators: %s: the unrecognised page-role key passed in. */
+					esc_html__( '"%s" is not a registered Vistula page role. See VISTULA_PAGE_ROLES.', 'vistula-core' ),
+					esc_html( $role )
+				),
+				'0.1.0'
+			);
+			return $default;
+		}
+
+		// TODO(Stage 3): resolve $role to a real Page ID via the mapping
 		// built on the vistula-core settings page, then return get_permalink().
 		return $default;
 	}

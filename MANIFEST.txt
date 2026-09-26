@@ -1,0 +1,45 @@
+MANIFEST — Vistula Travel Stage 2 transfer archive
+Generated from git history (commits 7c2c579 -> 6af48c4 -> a8487f8); no files were modified to produce this.
+
+FILE                                                                   STATE      COMMIT
+--------------------------------------------------------------------------------------------------------------
+.editorconfig                                                          added                 7c2c579 (repo scaffolding + Phase 0 docs)
+.env.example                                                           added                 7c2c579 (repo scaffolding + Phase 0 docs)
+.github/workflows/ci.yml                                               added                 a8487f8 (Stage 2: field framework, content policy, CI, data-access)
+.gitignore                                                             added                 7c2c579 (repo scaffolding + Phase 0 docs)
+README.md                                                              added                 7c2c579 (repo scaffolding + Phase 0 docs)
+composer.json                                                          added                 a8487f8 (Stage 2: field framework, content policy, CI, data-access)
+docs/data-model.md                                                     added                 7c2c579 (repo scaffolding + Phase 0 docs)
+docs/implementation-roadmap.md                                         added                 7c2c579 (repo scaffolding + Phase 0 docs)
+docs/project-architecture.md                                           added                 7c2c579 (repo scaffolding + Phase 0 docs)
+docs/technical-decisions.md                                            added, then modified  added in 7c2c579 (repo scaffolding + Phase 0 docs); modified in a8487f8 (Stage 2: field framework, content policy, CI, data-access)
+phpcs.xml.dist                                                         added                 a8487f8 (Stage 2: field framework, content policy, CI, data-access)
+wp-content/plugins/vistula-core/config/acf-json/README.md              added                 a8487f8 (Stage 2: field framework, content policy, CI, data-access)
+wp-content/plugins/vistula-core/src/Api/destinations.php               added                 a8487f8 (Stage 2: field framework, content policy, CI, data-access)
+wp-content/plugins/vistula-core/src/Api/page-roles.php                 added, then modified  added in 6af48c4 (theme + plugin foundation); modified in a8487f8 (Stage 2: field framework, content policy, CI, data-access)
+wp-content/plugins/vistula-core/src/Api/settings.php                   added                 6af48c4 (theme + plugin foundation)
+wp-content/plugins/vistula-core/src/Api/tours.php                      added                 6af48c4 (theme + plugin foundation)
+wp-content/plugins/vistula-core/src/Api/translation.php                added                 a8487f8 (Stage 2: field framework, content policy, CI, data-access)
+wp-content/plugins/vistula-core/src/Content/comments-and-archives.php  added                 a8487f8 (Stage 2: field framework, content policy, CI, data-access)
+wp-content/plugins/vistula-core/src/Fields/json-sync.php               added                 a8487f8 (Stage 2: field framework, content policy, CI, data-access)
+wp-content/plugins/vistula-core/vistula-core.php                       added, then modified  added in 6af48c4 (theme + plugin foundation); modified in a8487f8 (Stage 2: field framework, content policy, CI, data-access)
+wp-content/themes/vistula-travel/404.php                               added                 6af48c4 (theme + plugin foundation)
+wp-content/themes/vistula-travel/footer.php                            added                 6af48c4 (theme + plugin foundation)
+wp-content/themes/vistula-travel/functions.php                         added, then modified  added in 6af48c4 (theme + plugin foundation); modified in a8487f8 (Stage 2: field framework, content policy, CI, data-access)
+wp-content/themes/vistula-travel/header.php                            added                 6af48c4 (theme + plugin foundation)
+wp-content/themes/vistula-travel/inc/enqueue.php                       added                 6af48c4 (theme + plugin foundation)
+wp-content/themes/vistula-travel/inc/plugin-dependency.php             added                 a8487f8 (Stage 2: field framework, content policy, CI, data-access)
+wp-content/themes/vistula-travel/inc/setup.php                         added                 6af48c4 (theme + plugin foundation)
+wp-content/themes/vistula-travel/index.php                             added                 6af48c4 (theme + plugin foundation)
+wp-content/themes/vistula-travel/page.php                              added                 6af48c4 (theme + plugin foundation)
+wp-content/themes/vistula-travel/single.php                            added                 6af48c4 (theme + plugin foundation)
+wp-content/themes/vistula-travel/style.css                             added                 6af48c4 (theme + plugin foundation)
+wp-content/themes/vistula-travel/template-parts/layout/site-footer.php added                 6af48c4 (theme + plugin foundation)
+wp-content/themes/vistula-travel/template-parts/layout/site-header.php added                 6af48c4 (theme + plugin foundation)
+wp-content/themes/vistula-travel/theme.json                            added                 6af48c4 (theme + plugin foundation)
+
+Total files: 34
+
+Excluded by design: .git/, WordPress core (never present in this repo),
+secrets/.env (never present — only the tracked .env.example template),
+node_modules/vendor (never present), temporary files.

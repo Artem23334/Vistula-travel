@@ -28,23 +28,23 @@ This is the **decision log**. Nothing here has been silently decided: each item 
 | TD-08 | Testimonial = non-public CPT | PROVISIONAL | Analysis | Stage 6 |
 | TD-09 | Two taxonomies: `tour_category` (theme) + `tour_type` (format) | PROVISIONAL | Analysis; OQ-07/08 | Stage 5 |
 | TD-10 | Enumerations stored as machine keys; labels via gettext | PROVISIONAL | Analysis | Stage 5 |
-| TD-11 | Data model + business logic in plugin `vistula-core`; theme = presentation | PROVISIONAL | Analysis; OQ-04 | Stage 2 |
-| TD-12 | Field framework | **TO EVALUATE** | Analysis; OQ-03 | Stage 2 (spike) |
-| TD-13 | Templates use a data-access layer, never a framework API | PROVISIONAL | Analysis | Stage 2 |
+| TD-11 | Data model + business logic in plugin `vistula-core`; theme = presentation | **DECIDED** | Analysis; OQ-04 (approved) | — |
+| TD-12 | Field framework: **Secure Custom Fields (SCF)**, via Local JSON | **DECIDED** (code-level); runtime spike still pending | Analysis; OQ-03 | Stage 2 (decided) / real-WP verification pending |
+| TD-13 | Templates use a data-access layer, never a framework API | **DECIDED**; implemented (`vistula_setting`, `vistula_page_url`, `vistula_tour`, `vistula_destination`, `vistula_resolve_translation`) | Analysis | — |
 | TD-14 | Relationships stored on one side; reverse derived by query; shadow taxonomy held in reserve | PROVISIONAL / TO EVALUATE (storage) | Analysis | Stage 5 |
 | TD-15 | Single site currency: PLN | PROVISIONAL | Analysis (F-12) | Stage 5 |
 | TD-16 | Duration = value + unit → computed minutes + bucket | PROVISIONAL | Analysis | Stage 5 |
 | TD-17 | Global Settings = plugin settings page + accessor; not Customizer | PROVISIONAL | Analysis | Stage 3 |
-| TD-18 | Listing pages are real Pages; CPT `has_archive=false`; page-roles registry | PROVISIONAL | Analysis | Stage 2 (rewrite test) |
-| TD-19 | Plugin-agnostic multilingual contract (architecture M-1…M-15); language codes `pl en ru uk` | **DECIDED** (languages, no plugin now) / PROVISIONAL (contract) | Spec §3; Prompt 01 | Stage 11 |
-| TD-20 | Multilingual plugin selection | **TO EVALUATE** | Prompt 01 | Stage 2 spike → Stage 11 |
+| TD-18 | Listing pages are real Pages; CPT `has_archive=false`; page-roles registry | PROVISIONAL (rewrite test not runnable — see §3 note) | Analysis | Stage 5 (rewrite test, once a CPT exists) |
+| TD-19 | Plugin-agnostic multilingual contract (architecture M-1…M-15); language codes `pl en ru uk` | **DECIDED** (languages, no plugin now); Stage 2 code audit against M-1/M-3/M-4 passed | Spec §3; Prompt 01 | Stage 11 |
+| TD-20 | Multilingual plugin selection | **TO EVALUATE** — mandatory throwaway-sandbox spike still not run (needs real WordPress) | Prompt 01 | Stage 2 spike (blocked on environment) → Stage 11 |
 | TD-21 | Language URLs as subdirectories on one domain | PROVISIONAL | Analysis; OQ-01/02 | Stage 11 |
 | TD-22 | Fallback policy (untranslated content not listed; settings fall back to default language) | PROVISIONAL | Analysis | Stage 11 |
 | TD-23 | Image strategy: per-role ratios, derivative sets, focal point, `object-fit` policy | PROVISIONAL | Spec §14 + analysis | Stage 5 (validate with real photos) |
 | TD-24 | AVIF derivatives | **TO EVALUATE** | Analysis | Stage 2 (host check) / 15 |
 | TD-25 | Lazy-load everything except the LCP image (`eager` + `fetchpriority=high`) | **DECIDED** | Best practice | — |
 | TD-26 | Search/filter: server-rendered GET forms → `WP_Query`; filtered URLs `noindex` + canonical | PROVISIONAL | Analysis | Stage 5 |
-| TD-27 | Diacritic-folded search index (`ł`) | **TO EVALUATE** | Analysis | Stage 2 (test) |
+| TD-27 | Diacritic-folded search index (`ł`) | **TO EVALUATE** — code-level review only; live collation test needs a real DB (see §3 note) | Analysis | Stage 5 (test, once destinations/DB exist) |
 | TD-28 | SEO plugin vs in-house meta module | **TO EVALUATE** | Spec §19 | Stage 15 (framework decided earlier) |
 | TD-29 | Structured data set; **no** `Review`/`AggregateRating` for demo reviews | PROVISIONAL | Analysis | Stage 15 |
 | TD-30 | Booking solution | **TO EVALUATE** | Spec §15; OQ-05 | Start of Stage 12 |
@@ -58,10 +58,10 @@ This is the **decision log**. Nothing here has been silently decided: each item 
 | TD-38 | Self-hosted, subsetted fonts covering Latin-Ext + Cyrillic | PROVISIONAL | Analysis | Stage 4 |
 | TD-39 | Accessibility target WCAG 2.2 AA; native `<details>` accordions | PROVISIONAL | Analysis; OQ-18 | Stage 4 |
 | TD-40 | Security hardening baseline (architecture §16.2) | **DECIDED** (principles) / PROVISIONAL (list) | Spec §22 | Stage 16 |
-| TD-41 | Comments disabled; author and tag archives `noindex` | PROVISIONAL | Analysis | Stage 2 |
-| TD-42 | Repo `Artem23334/vistula-travel`; layout, trunk-based flow, Conventional Commits, CI | **DECIDED** (name/owner) / PROVISIONAL (rest) | Spec §23 | Stage 2 |
+| TD-41 | Comments disabled; author and tag archives `noindex` | **DECIDED**; implemented (`vistula-core/src/Content/comments-and-archives.php`) | Analysis | — |
+| TD-42 | Repo `Artem23334/vistula-travel`; layout, trunk-based flow, Conventional Commits, CI | **DECIDED** (name/owner, CI) / PROVISIONAL (rest of layout) | Spec §23 | Stage 2 (CI decided) |
 | TD-43 | Demo content is reproducible from WP-CLI seed scripts resolving relations by slug | PROVISIONAL | Analysis (R-15) | Stage 5 |
-| TD-44 | Test toolchain: PHPCS/WPCS, PHPUnit, Playwright, axe, Lighthouse CI | PROVISIONAL | Analysis | Stage 2 → 16 |
+| TD-44 | Test toolchain: PHPCS/WPCS, PHPUnit, Playwright, axe, Lighthouse CI | **DECIDED** (PHPCS/WPCS/lint — implemented) / PROVISIONAL (PHPUnit, Playwright, axe, Lighthouse) | Analysis | Stage 2 (lint/PHPCS done) → 16 (rest) |
 | TD-45 | Environments: Local + Production; **Staging** | **DECIDED** (local/prod) / TO EVALUATE (staging) | Spec §25; OQ-21 | Stage 17 |
 | TD-46 | Deployment mechanism | **TO EVALUATE** | Spec §25 | Stage 17 |
 | TD-47 | Hosting baseline: PHP 8.3 target, DB ≥ MySQL 8 / MariaDB 10.6, WebP-capable image lib, SSH/WP-CLI, EU region; host itself TO EVALUATE | PROVISIONAL / TO EVALUATE | Analysis | Stage 18 |
@@ -82,45 +82,47 @@ Format: **Context → Decision → Alternatives → Consequences → Revisit whe
 - **Consequences:** header/footer discipline is a QA item; the block editor is still used for *content*.
 - **Revisit:** not planned.
 
-### TD-11 · Theme vs plugin split
+### TD-11 · Theme vs plugin split — **DECIDED**
 - **Context:** data structures (CPTs, taxonomies, fields, settings) placed in a theme vanish when the theme changes, and mix presentation with business rules.
 - **Decision:** everything that defines *what the business data is* goes in `vistula-core`; the theme only presents it.
 - **Alternatives:** everything in the theme (fewer files, but data becomes theme-bound); must-use plugin (more rigid, harder for a client-hand-off to manage).
-- **Consequences:** two code trees in Git; theme cannot function without the plugin (it must fail gracefully with an admin notice).
-- **Revisit when:** OQ-04 is answered.
+- **Consequences:** two code trees in Git; theme cannot function without the plugin — **implemented**: it fails gracefully with an admin notice (`vistula-travel/inc/plugin-dependency.php`) rather than a fatal error, per the consequence stated above.
+- **Confirmed:** OQ-04 approved.
 
-### TD-12 · Field framework — evaluation (TO EVALUATE)
+### TD-12 · Field framework — **DECIDED**: Secure Custom Fields (SCF), via Local JSON
 **Requirements the framework must meet**
 
-| # | Requirement |
+| # | Requirement | Met by SCF? |
+|---|---|---|
+| F1 | Field *definitions* exportable to files in Git (not DB-only) | Yes — Local JSON sync, wired to `vistula-core/config/acf-json/` (`src/Fields/json-sync.php`) |
+| F2 | Repeatable groups (itinerary, things-to-do, hours, social links) | Yes — Repeater is included free in SCF (it was a paid ACF Pro feature; SCF ships it in the free/only tier) |
+| F3 | Relationship fields with **ordering** | Yes — Relationship field type preserves manual order |
+| F4 | Gallery / image fields; conditional logic; validation hooks | Yes — all present in SCF's field-type set |
+| F5 | Settings pages (or a clean way to build our own) | Yes — Options Pages included free |
+| F6 | REST exposure control (`show_in_rest` per field) | Yes |
+| F7 | Documented compatibility with the multilingual plugins we may choose | Yes for the ACF lineage generally (both Polylang and WPML document ACF/SCF field sync); **not yet verified for SCF specifically** — folded into the still-open TD-20 spike |
+| F8 | Active maintenance, sane licence and cost, and an exit path | Strong: maintained by the WordPress.org security/plugin team itself (created after the Oct 2024 ACF/WP Engine dispute), GPL, free, no licence cost — the lowest dependency-risk option of the candidates considered |
+| F9 | Editor UX a non-technical client can use | Yes — same editor UI ACF is known for |
+
+**Candidates considered (rejected)**
+
+| Candidate | Why not chosen |
 |---|---|
-| F1 | Field *definitions* exportable to files in Git (not DB-only) |
-| F2 | Repeatable groups (itinerary, things-to-do, hours, social links) |
-| F3 | Relationship fields with **ordering** |
-| F4 | Gallery / image fields; conditional logic; validation hooks |
-| F5 | Settings pages (or a clean way to build our own) |
-| F6 | REST exposure control (`show_in_rest` per field) |
-| F7 | Documented compatibility with the multilingual plugins we may choose |
-| F8 | Active maintenance, sane licence and cost, and an exit path |
-| F9 | Editor UX a non-technical client can use |
+| **ACF Pro** | Functionally near-identical to SCF for our needs, but paid (recurring licence cost, F8) where SCF is free and officially maintained. |
+| **Meta Box** | Viable, but several needed features (F2/F3/F5 equivalents) sit behind paid extensions; SCF includes them free. |
+| **Carbon Fields / CMB2** | Git-friendly by nature (code-defined), but smaller ecosystem and less-documented multilingual-plugin integration (F7) than the ACF lineage; noted as the fallback if SCF's multilingual compatibility fails Stage 11 verification. |
+| **Native** (`register_post_meta` + custom UI) | Rejected for now: meets every requirement in principle but at the highest development cost (F9 requires hand-built React/UI), disproportionate for this project's size. |
 
-**Candidates (as of 2026-09-21; capabilities to be confirmed in the spike)**
+- **Rationale for the decision itself:** SCF meets every requirement (F1–F9) at zero licence cost and the lowest maintenance-abandonment risk of any candidate, since it is maintained by the same organization that ships WordPress core. The data-access layer (TD-13) means this choice is not architecturally load-bearing even if reversed later.
+- **What remains unverified:** the literal runtime spike the roadmap calls for (installing SCF, building a *Tour* field group with an itinerary repeater and an ordered relationship, confirming it survives a multilingual-plugin candidate) **cannot be run in this environment — no PHP/WordPress runtime is available here.** Only the integration plumbing (Local JSON save/load paths) has been prepared and is a no-op until SCF is actually installed. **This verification is a precondition for Stage 5**, not for closing this decision.
+- **Revisit when:** the Stage 5/Stage 11 runtime verification above actually runs, in case it surfaces a real incompatibility.
 
-| Candidate | Notes |
-|---|---|
-| **ACF Pro** | Very widely used (2 M+ installs on the free edition); the free edition lacks the Repeater — that is a Pro feature; paid licence; broad multilingual-plugin documentation. |
-| **Secure Custom Fields (SCF)** | WordPress.org-maintained fork of ACF, created after the late-2024 ACF/WP Engine dispute; free; actively released in 2026; deactivates ACF if both are present. **Confirm** exactly which Pro-tier features (repeater, options pages) it includes, and the community/ecosystem stance. |
-| **Meta Box** | Code-friendly; core free, several advanced features via paid extensions. |
-| **Carbon Fields / CMB2** | Code-defined, open-source, Git-friendly by nature; smaller ecosystem and less documented multilingual integration. |
-| **Native** (`register_post_meta` + block-editor sidebar panels + Settings API) | Zero dependency, maximal control; **highest development effort** and custom React UI. |
-
-**Preliminary lean (not a decision):** an ACF-lineage tool (ACF Pro or SCF) for editor UX and the widest multilingual compatibility, with Carbon Fields as the code-first alternative. Decide by a **1–2 day spike in Stage 2** that builds the *Tour* field group (itinerary repeater + ordered relationship) and runs it through the multilingual compatibility spike. Whatever wins is hidden behind the data-access layer (TD-13), which limits the cost of being wrong.
-
-### TD-13 · Data-access layer
+### TD-13 · Data-access layer — **DECIDED**; implemented
 - **Context:** three undecided integrations (field framework, multilingual plugin, booking provider) all touch the data model.
 - **Decision:** templates call `vistula_tour()`, `vistula_destination()`, `vistula_setting()`, `vistula_page_url()` etc. Nothing else. These return typed arrays with defaults applied and expose a no-op `vistula_resolve_translation` hook.
 - **Alternatives:** call `get_field()`/`get_post_meta()` in templates (faster to write; couples every template to one framework and to the multilingual plugin).
 - **Consequences:** a small amount of upfront code; every "change of mind" becomes local.
+- **Implemented this stage:** all five contract functions exist as stubs in `vistula-core/src/Api/` (`settings.php`, `page-roles.php`, `tours.php`, `destinations.php`, `translation.php`), each returning its caller-supplied default/`null` and each tagged with the stage that gives it a real implementation. No template anywhere calls `get_option()`, `get_post_meta()`, or queries `post_type=tour`/`post_type=destination` directly — verified by a repo-wide grep this stage.
 - **Revisit when:** never — it is the cheapest form of risk reduction in this design.
 
 ### TD-14 · Relationship storage
@@ -144,7 +146,7 @@ Format: **Context → Decision → Alternatives → Consequences → Revisit whe
 ### TD-18 · Listing pages as real Pages
 - **Decision:** `Tours`, `Destinations`, `Travel Guide` are Pages with templates; CPTs use `has_archive=false` with a rewrite base equal to the Page slug.
 - **Why:** editable intro/SEO in the standard editor; translatable objects; predictable multilingual behaviour.
-- **Risk:** slug/rewrite interplay (`/tours/` Page vs `/tours/{slug}/` CPT) must be proven — **Stage 2 rewrite test**. Fallback: enable the CPT archive and store intro/SEO in settings.
+- **Risk:** slug/rewrite interplay (`/tours/` Page vs `/tours/{slug}/` CPT) must be proven — the **rewrite test needs an actual registered CPT to flush rewrite rules against, and none exists until Stage 5.** Moved from "Stage 2 rewrite test" to "Stage 5", since attempting it now would test nothing real. Fallback unchanged: enable the CPT archive and store intro/SEO in settings.
 
 ### TD-19…22 · Multilingual (no plugin now)
 - **Decision:** honour the contract in architecture §8.3 from the first template. Language registry in code. Subdirectory URLs. Fallback policy per architecture §8.5.
@@ -155,8 +157,9 @@ Format: **Context → Decision → Alternatives → Consequences → Revisit whe
 | **Separate object per language** | Polylang, WPML | Natural fit for structured content (relationships, per-language slugs, per-language SEO). Needs "synchronise N-fields" behaviour. |
 | **Render-time string translation** | TranslatePress, Weglot | Simpler for pages; weaker for query-derived content, translated slugs and relationship-driven listings; Weglot is a third-party SaaS (data-protection review needed). |
 
-- **Mandatory spike (Stage 2, throw-away sandbox, not the project repo):** verify that a relationship, an ordered FAQ list, the itinerary repeater, a settings field, a CPT slug, a nav menu and attachment alt text behave under each shortlisted plugin. The outcome is recorded here before Stage 11.
-- **Revisit when:** Stage 2 spike results and OQ-01/OQ-02.
+- **Mandatory spike (Stage 2, throw-away sandbox, not the project repo):** verify that a relationship, an ordered FAQ list, the itinerary repeater, a settings field, a CPT slug, a nav menu and attachment alt text behave under each shortlisted plugin. **Still not run — this genuinely requires a running WordPress instance, which this environment does not have.** The outcome is recorded here before Stage 11.
+- **Stage 2 code-level audit performed instead (what *is* checkable without a runtime):** every current theme/plugin file was grepped for M-1 (gettext-wrapped UI strings), M-3 (no hard-coded URLs/IDs — `home_url()`/`vistula_page_url()` used throughout, no literal `/slug/` anywhere) and M-4 (the `vistula_resolve_translation` no-op hook, now implemented in `src/Api/translation.php`). **All three passed** — no violation found. This is a necessary but not sufficient check: it confirms the code doesn't *prevent* multilingual compatibility, not that a specific plugin *works* with it. The mandatory spike above is still required before Stage 11.
+- **Revisit when:** the mandatory spike actually runs, and OQ-01/OQ-02.
 
 ### TD-23/24 · Images
 - **Decision (PROVISIONAL):** hard-cropped derivative sets per role (4:3 card, 16:9 hero, 1:1 square, 1.91:1 OG), several widths per ratio for a real `srcset`, WebP baseline, per-image focal point, `object-fit` only where the container ratio is genuinely variable.
@@ -165,7 +168,7 @@ Format: **Context → Decision → Alternatives → Consequences → Revisit whe
 
 ### TD-26/27 · Search and filtering
 - **Decision:** server-rendered GET forms → `pre_get_posts`/`WP_Query`; progressive JS later; filtered URLs `noindex, follow` + canonical to the clean page; indexable landing pages are category/type archives and Destination pages.
-- **Diacritics:** test whether `Wroclaw` finds `Wrocław` in the chosen database collation; fall back to a folded index field if not.
+- **Diacritics (TD-27):** the live test — whether `Wroclaw` finds `Wrocław` in the chosen database collation — **requires a real database and real destination content, neither of which exists yet.** Moved to Stage 5. **Stage 2 code-level check performed instead:** reviewed all current code for anything that would mis-handle `ą ć ę ł ń ó ś ź ż` before the live test is even possible — none found (no current code does string/slug manipulation at all; the only place that will matter is Stage 5's search query and Stage 8's destination slugs, both of which will rely on WordPress core's `remove_accents()`/`sanitize_title()` — a well-documented, already-correct baseline — plus the deferred folded-index fallback if the live collation test fails).
 - **Rejected for now:** external search engines, facet counts.
 
 ### TD-28 · SEO ownership
@@ -189,9 +192,16 @@ Format: **Context → Decision → Alternatives → Consequences → Revisit whe
 - **Decision:** native CSS (custom properties, `@layer`, low specificity) and vanilla ES-module JS. A bundler is introduced only when a concrete problem justifies it.
 - **Why:** fewer moving parts for a portfolio-scale theme; easier debugging (Spec principle 10).
 
+### TD-41 · Comments disabled; author/tag archives noindex — **DECIDED**; implemented
+- **Decision:** the site has no commenting, no multi-author byline strategy, and no tag taxonomy in the approved content model, so all three are disabled/noindexed as a baseline content-policy rule.
+- **Implemented this stage** in `vistula-core/src/Content/comments-and-archives.php`: comment/trackback support removed from every public post type; `comments_open`/`pings_open` forced closed at the query level (covers content that arrives with comments already open); Comments admin menu, dashboard widget entry point, and admin-bar bubble removed; author and tag archives noindexed via the core `wp_robots` filter (the single, filterable seam SEO output is required to go through, per TD-28).
+- **Why in the plugin, not the theme:** this is a business rule ("this site doesn't do comments"), not a presentation choice — it should survive a theme change, per TD-11.
+- **Revisit when:** never, unless the business requirements change (e.g. a future decision to add a blog-comment strategy).
+
 ### TD-42/43 · Git and seed content
 - **DECIDED:** repository `vistula-travel`, owner `Artem23334`, workflow change → test → `git diff` → commit → push.
-- **PROVISIONAL:** layout (docs, theme, plugin, seed, tools, CI), trunk-based, Conventional Commits, CI (lint, WPCS ≥ 3.4.1, PHPUnit, secret scan).
+- **DECIDED (CI portion, this stage):** `composer.json` (PHPCS + WPCS ≥3.4.1 + PHPCompatibilityWP as dev dependencies, no runtime dependency), `phpcs.xml.dist` (WordPress ruleset, PHP 8.2+ compatibility, two-text-domain aware), `.github/workflows/ci.yml` (PHP lint + PHPCS on PHP 8.2/8.3 matrix, plus a basic secret-pattern scan job). **Could not be executed in this environment** — no Composer/network access — so these are unverified against a real `composer install`; see the Stage 2 report for the static checks that *were* possible (JSON/XML/YAML validity).
+- **PROVISIONAL:** remaining repo layout (seed/, tools/ — not created yet, nothing needs them until Stage 5), PHPUnit (Stage 16 — nothing meaningful to unit-test yet).
 - **Seed content** is code: WP-CLI scripts create tours/destinations and resolve relations **by slug**, so IDs may differ between environments without breaking anything (R-15).
 
 ### TD-45/46/47 · Environments and deployment
@@ -304,5 +314,6 @@ Facts that change over time were verified where possible; other statements are f
 | Date | Change |
 |---|---|
 | 2026-09-21 | Initial version (Phase 0). |
+| 2026-09-24 | Stage 2 (Theme Foundation) implementation. TD-11 confirmed DECIDED (theme now fails gracefully via admin notice if `vistula-core` is inactive). TD-12 decided: **Secure Custom Fields (SCF)** via Local JSON — see the rewritten decision record; runtime spike still pending, no fields created. TD-13 implemented (`vistula_destination()`, `vistula_resolve_translation()` added alongside the existing three functions). TD-18's rewrite test moved Stage 2 → Stage 5 (no CPT exists yet to test against). TD-19–22: Stage 2 code-level M-1/M-3/M-4 audit passed; the mandatory multilingual-plugin spike remains unrun (no WordPress runtime available). TD-26/27 diacritic live-collation test moved Stage 2 → Stage 5 (no database/content exists yet); a code-level review found nothing that would mishandle Polish diacritics in current code. TD-41 decided and implemented (comments disabled, author/tag archives noindexed). TD-42/44 CI portion decided and added (`composer.json`, `phpcs.xml.dist`, `.github/workflows/ci.yml`) — not executable in this environment (no Composer/network access), so unverified against a real `composer install`. |
 
 *End of `technical-decisions.md`.*
