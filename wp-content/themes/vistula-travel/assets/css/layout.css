@@ -1,0 +1,65 @@
+/**
+ * Vistula Travel — Layout primitives.
+ *
+ * Containers and section spacing rhythm. Deliberately small: this is the
+ * shared scaffolding every page-level layout (Homepage, Tour, Destination,
+ * ...) will sit inside, not a page-building system.
+ *
+ * @package Vistula_Travel
+ */
+
+.container {
+	width: 100%;
+	max-width: var(--vistula-container-max);
+	margin-inline: auto;
+	padding-inline: var(--vistula-container-padding);
+}
+
+.container--narrow {
+	max-width: var(--vistula-container-narrow);
+}
+
+/* A section is the standard vertical rhythm unit between page blocks
+   (Hero, "Why choose us", Popular Tours, ...). Later stages compose
+   sections; this file only sets their spacing. */
+.section {
+	padding-block: var(--vistula-space-xl);
+}
+
+@media (min-width: 768px) {
+	.section {
+		padding-block: var(--vistula-space-2xl);
+	}
+}
+
+.section--tight {
+	padding-block: var(--vistula-space-lg);
+}
+
+.section--inverse {
+	background-color: var(--vistula-color-surface-inverse);
+	color: var(--vistula-color-text-on-dark);
+}
+
+/* Minimal responsive card grid — used by Tour cards, Destination cards,
+   and any future card-based listing. Mobile-first: one column, then two,
+   then three as space allows. Deliberately not a general-purpose grid
+   system (no configurable column counts) — add one only if a later
+   stage genuinely needs it (avoid unnecessary tooling, per the brief). */
+.card-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--vistula-space-md);
+}
+
+@media (min-width: 600px) {
+	.card-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (min-width: 1024px) {
+	.card-grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}

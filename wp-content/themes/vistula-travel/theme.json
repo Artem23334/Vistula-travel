@@ -2,6 +2,66 @@
 	"$schema": "https://schemas.wp.org/trunk/theme.json",
 	"version": 2,
 	"settings": {
-		"appearanceTools": false
+		"appearanceTools": false,
+		"layout": {
+			"contentSize": "48rem",
+			"wideSize": "80rem"
+		},
+		"color": {
+			"custom": false,
+			"customGradient": false,
+			"customDuotone": false,
+			"defaultPalette": false,
+			"defaultGradients": false,
+			"palette": [
+				{ "slug": "graphite", "name": "Graphite", "color": "#1B1B18" },
+				{ "slug": "ivory", "name": "Warm Ivory", "color": "#F6F1E7" },
+				{ "slug": "forest", "name": "Forest Green", "color": "#2B4438" },
+				{ "slug": "gold", "name": "Muted Gold", "color": "#B08A4E" },
+				{ "slug": "graphite-soft", "name": "Graphite, soft", "color": "#3A3A35" },
+				{ "slug": "ivory-dim", "name": "Ivory, dim", "color": "#E7DFCF" }
+			]
+		},
+		"typography": {
+			"customFontSize": false,
+			"dropCap": false,
+			"fontFamilies": [
+				{
+					"slug": "display",
+					"name": "Display (editorial serif)",
+					"fontFamily": "'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif"
+				},
+				{
+					"slug": "body",
+					"name": "Body (sans)",
+					"fontFamily": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+				}
+			],
+			"fontSizes": [
+				{ "slug": "caption", "name": "Caption", "size": "0.8125rem" },
+				{ "slug": "body", "name": "Body", "size": "1rem" },
+				{ "slug": "body-lg", "name": "Body, large", "size": "1.125rem" },
+				{ "slug": "heading-sm", "name": "Heading, small", "size": "1.375rem" },
+				{ "slug": "heading-md", "name": "Heading, medium", "size": "1.75rem" },
+				{ "slug": "heading-lg", "name": "Heading, large", "size": "2.5rem" },
+				{ "slug": "display", "name": "Display", "size": "3.5rem" },
+				{ "slug": "hero", "name": "Hero", "size": "clamp(2.75rem, 6vw, 6rem)" }
+			]
+		},
+		"spacing": {
+			"customSpacingSize": false,
+			"units": [ "px", "rem", "%", "vh", "vw" ],
+			"spacingSizes": [
+				{ "slug": "3xs", "name": "3X Small", "size": "0.25rem" },
+				{ "slug": "2xs", "name": "2X Small", "size": "0.5rem" },
+				{ "slug": "xs", "name": "X Small", "size": "0.75rem" },
+				{ "slug": "sm", "name": "Small", "size": "1rem" },
+				{ "slug": "md", "name": "Medium", "size": "1.5rem" },
+				{ "slug": "lg", "name": "Large", "size": "2.5rem" },
+				{ "slug": "xl", "name": "X Large", "size": "4rem" },
+				{ "slug": "2xl", "name": "2X Large", "size": "6rem" },
+				{ "slug": "3xl", "name": "3X Large", "size": "9rem" }
+			]
+		}
 	}
 }

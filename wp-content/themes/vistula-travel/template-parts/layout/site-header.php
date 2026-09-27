@@ -60,7 +60,7 @@ $vistula_logo_id = vistula_setting( 'logo_id' );
 
 	<a
 		class="site-header__cta"
-		href="<?php echo esc_url( vistula_page_url( 'booking' ) ); ?>"
+		href="<?php echo esc_url( vistula_page_url( vistula_setting( 'cta_target_role', 'tours' ) ) ); ?>"
 	>
 		<?php echo esc_html( vistula_setting( 'cta_label', __( 'Book Now', 'vistula-travel' ) ) ); ?>
 	</a>

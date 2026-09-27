@@ -12,7 +12,8 @@ License URI:        https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain:        vistula-travel
 
 This is a classic PHP theme (not a block/FSE theme) — see docs/project-architecture.md §3.4.
-Visual design tokens and component styles are intentionally NOT here yet — see Stage 4
-(Design System) in docs/implementation-roadmap.md. This file exists so WordPress recognizes
-the theme; it is enqueued as-is by inc/enqueue.php.
+This file is the required WordPress theme-header stylesheet only — it carries no rules of
+its own. The Stage 4 design system (tokens, base, layout, header/footer chrome, components,
+Hero foundation) lives in assets/css/*.css, enqueued in dependency order by inc/enqueue.php.
+theme.json carries the matching block-editor-facing presets (palette, font sizes, spacing).
 */

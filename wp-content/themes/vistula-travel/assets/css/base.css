@@ -1,0 +1,208 @@
+/**
+ * Vistula Travel — Base layer.
+ *
+ * A conservative modern reset, base element typography, and the
+ * accessibility primitives (.screen-reader-text, .skip-link,
+ * :focus-visible) every other file assumes already exist.
+ *
+ * Font files: no @font-face rule loads a custom font yet. The sandbox
+ * this theme was authored in has no network access to fetch real font
+ * binaries (Latin-Extended-A + Cyrillic subsets, per TD-38), so
+ * --vistula-font-display/--vistula-font-body (tokens.css) are
+ * deliberately broad-coverage system-font stacks for now — see the
+ * Stage 4 report's "unresolved decisions" for the exact upgrade path
+ * once real font files are chosen and available.
+ *
+ * @package Vistula_Travel
+ */
+
+/* ---------------------------------------------------------------
+ * Reset — conservative; keeps semantic HTML default behaviour where
+ * that behaviour is itself accessible (e.g. list semantics for nav
+ * menus are stripped only where a component explicitly styles them).
+ * ------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+	scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+}
+
+body {
+	margin: 0;
+	background-color: var(--vistula-color-surface);
+	color: var(--vistula-color-text);
+	font-family: var(--vistula-font-body);
+	font-size: var(--vistula-text-body);
+	font-weight: var(--vistula-weight-regular);
+	line-height: var(--vistula-leading-body);
+	-webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+svg {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+/* Respect the actual intrinsic size of icon-sized SVGs. */
+svg[width][height] {
+	max-width: none;
+	height: auto;
+}
+
+a {
+	color: inherit;
+}
+
+button {
+	font: inherit;
+	color: inherit;
+	background: none;
+	border: 0;
+	cursor: pointer;
+}
+
+ul[class],
+ol[class] {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+/* ---------------------------------------------------------------
+ * Base typography.
+ * ------------------------------------------------------------- */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0 0 var(--vistula-space-sm);
+	font-family: var(--vistula-font-display);
+	font-weight: var(--vistula-weight-medium);
+	line-height: var(--vistula-leading-heading);
+	text-wrap: balance;
+}
+
+h1 {
+	font-size: var(--vistula-text-display);
+	line-height: var(--vistula-leading-tight);
+}
+
+h2 {
+	font-size: var(--vistula-text-heading-lg);
+}
+
+h3 {
+	font-size: var(--vistula-text-heading-md);
+}
+
+h4 {
+	font-size: var(--vistula-text-heading-sm);
+}
+
+p {
+	margin: 0 0 var(--vistula-space-sm);
+	max-width: 70ch; /* readable measure; components override where a grid controls width */
+}
+
+small {
+	font-size: var(--vistula-text-caption);
+}
+
+/* Uppercase editorial "eyebrow" label style — used by .u-label and
+   several components (badges, metadata, scene indicators). */
+.u-label,
+.u-eyebrow {
+	display: inline-block;
+	font-size: var(--vistula-text-label);
+	font-weight: var(--vistula-weight-semibold);
+	letter-spacing: var(--vistula-tracking-label);
+	text-transform: uppercase;
+}
+
+/* ---------------------------------------------------------------
+ * Accessibility primitives.
+ * ------------------------------------------------------------- */
+
+/* Standard WordPress convention: visually hidden, still available to
+   assistive tech. Every theme is expected to define this itself once
+   theme-compat fallback is disabled (docs/project-architecture.md §17.2). */
+.screen-reader-text {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+/* The skip link is also .screen-reader-text until focused, at which
+   point it must become visible — this is the one place
+   .screen-reader-text's clipping is intentionally undone. */
+.skip-link.screen-reader-text:focus {
+	position: fixed;
+	z-index: var(--vistula-z-skip-link);
+	top: var(--vistula-space-2xs);
+	left: var(--vistula-space-2xs);
+	width: auto;
+	height: auto;
+	clip: auto;
+	overflow: visible;
+	padding: var(--vistula-space-2xs) var(--vistula-space-sm);
+	background-color: var(--vistula-color-graphite);
+	color: var(--vistula-color-ivory);
+	font-size: var(--vistula-text-label);
+	text-decoration: none;
+	border-radius: var(--vistula-radius-sm);
+}
+
+/* One focus-ring convention, everywhere. Components never define their
+   own outline — they inherit this or, on a dark background, opt into
+   the .is-on-dark focus variant below. */
+:focus-visible {
+	outline: var(--vistula-focus-width) solid var(--vistula-focus-color);
+	outline-offset: var(--vistula-focus-offset);
+}
+
+.is-on-dark :focus-visible,
+:focus-visible.is-on-dark {
+	outline-color: var(--vistula-focus-color-on-dark);
+}
+
+/* ---------------------------------------------------------------
+ * Reduced motion — the single override point. Every transition/
+ * animation declared anywhere in this design system is neutralized
+ * here rather than each component re-implementing its own check.
+ * ------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.001ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.001ms !important;
+		scroll-behavior: auto !important;
+	}
+}

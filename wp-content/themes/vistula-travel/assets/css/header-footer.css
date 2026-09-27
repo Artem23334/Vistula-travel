@@ -1,0 +1,253 @@
+/**
+ * Vistula Travel — Header & footer chrome.
+ *
+ * Styles the markup already in template-parts/layout/site-header.php and
+ * site-footer.php exactly as written (Stage 2/3) — no class names invented
+ * here that the PHP doesn't already output, and no PHP changed to fit this
+ * CSS. Mobile-first: the mobile nav (a hidden panel toggled by
+ * .site-header__menu-toggle) is the base state; the desktop nav is the
+ * min-width override.
+ *
+ * @package Vistula_Travel
+ */
+
+/* ---------------------------------------------------------------
+ * Header
+ * ------------------------------------------------------------- */
+
+.site-header {
+	position: sticky;
+	top: 0;
+	z-index: var(--vistula-z-header);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--vistula-space-sm);
+	padding-block: var(--vistula-space-2xs);
+	padding-inline: var(--vistula-container-padding);
+	background-color: var(--vistula-color-surface);
+	border-bottom: var(--vistula-border-width) solid var(--vistula-color-border);
+}
+
+.site-header__branding {
+	flex: 0 0 auto;
+}
+
+.site-header__logo-link {
+	display: inline-flex;
+	align-items: center;
+	text-decoration: none;
+}
+
+.site-header__logo-link img {
+	max-height: 2.5rem;
+	width: auto;
+}
+
+.site-header__logo-text {
+	font-family: var(--vistula-font-display);
+	font-size: var(--vistula-text-heading-sm);
+	font-weight: var(--vistula-weight-medium);
+	color: var(--vistula-color-text);
+}
+
+/* Mobile nav toggle — visible by default (mobile-first), hidden once the
+   nav can be shown inline at the `lg` breakpoint. */
+.site-header__menu-toggle {
+	order: 3;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.75rem; /* >= 44px touch target */
+	height: 2.75rem;
+	position: relative;
+}
+
+/* Plain CSS "hamburger" — three bars via one element's box-shadow, no
+   icon font/SVG dependency. Purely decorative; the accessible label is
+   the .screen-reader-text span already in the markup. */
+.site-header__menu-toggle::before {
+	content: '';
+	position: absolute;
+	width: 1.5rem;
+	height: 2px;
+	background-color: currentColor;
+	box-shadow:
+		0 -7px 0 currentColor,
+		0 7px 0 currentColor;
+}
+
+@media (min-width: 1024px) {
+	.site-header__menu-toggle {
+		display: none;
+	}
+}
+
+/* Primary nav — a full-screen mobile panel by default; an inline row at
+   `lg`. The panel's open/closed state is driven by JS toggling
+   aria-expanded on .site-header__menu-toggle, which later stages (Stage
+   14 JS) wire up; this file only defines what each state looks like. */
+.site-header__primary-nav {
+	order: 4;
+	position: fixed;
+	inset: 0;
+	top: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: var(--vistula-color-surface);
+	transform: translateY(0.5rem);
+	opacity: 0;
+	visibility: hidden;
+	transition:
+		opacity var(--vistula-duration-base) var(--vistula-ease-standard),
+		transform var(--vistula-duration-base) var(--vistula-ease-standard),
+		visibility 0s linear var(--vistula-duration-base);
+}
+
+.site-header__menu-toggle[aria-expanded='true'] + .site-header__primary-nav {
+	opacity: 1;
+	visibility: visible;
+	transform: translateY(0);
+	transition-delay: 0s;
+}
+
+.site-header__primary-nav ul {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--vistula-space-md);
+}
+
+.site-header__primary-nav a {
+	font-family: var(--vistula-font-display);
+	font-size: var(--vistula-text-heading-sm);
+	text-decoration: none;
+}
+
+@media (min-width: 1024px) {
+	.site-header__primary-nav {
+		order: 2;
+		position: static;
+		flex: 1 1 auto;
+		opacity: 1;
+		visibility: visible;
+		transform: none;
+		background: none;
+		transition: none;
+	}
+
+	.site-header__primary-nav ul {
+		flex-direction: row;
+		flex-wrap: wrap; /* multilingual text-expansion tolerance (M-3) — RU/UK labels run longer than PL/EN */
+		justify-content: center;
+		row-gap: var(--vistula-space-2xs);
+		column-gap: var(--vistula-space-lg);
+	}
+
+	.site-header__primary-nav a {
+		font-family: var(--vistula-font-body);
+		font-size: var(--vistula-text-label);
+		font-weight: var(--vistula-weight-medium);
+	}
+}
+
+/* Language switcher — implemented Stage 11; this is only its chrome slot
+   (kept out of layout flow via [aria-hidden] until it has real content). */
+.site-header__lang-switcher {
+	order: 5;
+	flex: 0 0 auto;
+}
+
+.site-header__lang-switcher[aria-hidden='true'] {
+	display: none;
+}
+
+.site-header__cta {
+	order: 1;
+	margin-inline-start: auto;
+}
+
+@media (min-width: 1024px) {
+	.site-header__cta {
+		order: 6;
+		margin-inline-start: 0;
+	}
+}
+
+/* ---------------------------------------------------------------
+ * Footer
+ * ------------------------------------------------------------- */
+
+.site-footer {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--vistula-space-lg);
+	padding-block: var(--vistula-space-xl);
+	padding-inline: var(--vistula-container-padding);
+	background-color: var(--vistula-color-surface-inverse);
+	color: var(--vistula-color-text-on-dark);
+}
+
+@media (min-width: 768px) {
+	.site-footer {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}
+
+.site-footer a {
+	color: var(--vistula-color-text-on-dark);
+}
+
+.site-footer__company address {
+	font-style: normal;
+	color: var(--vistula-color-text-muted-on-dark);
+}
+
+.site-footer__nav ul,
+.site-footer__legal ul {
+	display: flex;
+	flex-direction: column;
+	gap: var(--vistula-space-2xs);
+}
+
+.site-footer__legal {
+	grid-column: 1 / -1;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	gap: var(--vistula-space-sm);
+	padding-top: var(--vistula-space-md);
+	border-top: var(--vistula-border-width) solid var(--vistula-color-border-on-dark);
+}
+
+.site-footer__legal ul {
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: var(--vistula-space-sm);
+}
+
+.site-footer__social {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--vistula-space-sm);
+}
+
+.site-footer__copyright {
+	margin: 0;
+	font-size: var(--vistula-text-caption);
+	color: var(--vistula-color-text-muted-on-dark);
+}
+
+.site-footer__lang-switcher[aria-hidden='true'] {
+	display: none;
+}
+
+/* Dynamic tours/destinations lists — populated by real queries in Stage
+   5/8; until then these containers exist but render nothing, so no
+   placeholder-specific styling is needed beyond fitting the grid. */
+.site-footer__tours,
+.site-footer__destinations {
+	min-width: 0;
+}

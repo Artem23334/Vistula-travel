@@ -1,0 +1,272 @@
+/**
+ * Vistula Travel — Cinematic Hero foundation.
+ *
+ * Stage 4 brief: "the design system must establish a foundation fully
+ * compatible with [the cinematic Hero], not build the production Hero
+ * itself." This file is CSS only — there is no JS here, and no real
+ * scene content (video files, copy, destination names). Scene switching,
+ * autoplay timing, and the six real scenes (Gdańsk → Gdańsk → Warsaw →
+ * Masuria → Kraków → Tatra Mountains) are Homepage work (Stage 6) and
+ * JS/UX work (Stage 14).
+ *
+ * MARKUP CONTRACT — Stage 6 must produce (roughly) this shape for the CSS
+ * below to apply correctly. This is documentation, not enforced by code:
+ *
+ * <section class="hero is-on-dark">
+ *   <div class="hero__media">
+ *     <div class="hero__scene is-active" data-scene="1">
+ *       <img class="hero__poster" src="…" alt="">
+ *       <video class="hero__video" poster="…" muted loop playsinline autoplay>…</video>
+ *     </div>
+ *     <div class="hero__scene" data-scene="2"> … </div>
+ *     <!-- one .hero__scene per destination scene -->
+ *     <div class="hero__overlay"></div>
+ *   </div>
+ *   <div class="hero__content">
+ *     <span class="hero__label u-label">Gdańsk</span>
+ *     <h1 class="hero__headline">Discover the Baltic coast.</h1>
+ *     <p class="hero__copy">…optional supporting copy…</p>
+ *     <a class="hero__cta link--arrow" href="…">Explore Gdańsk</a>
+ *   </div>
+ *   <div class="hero__scene-indicator" role="tablist" aria-label="Hero scenes">
+ *     <button class="hero__scene-indicator-item is-active" role="tab" aria-current="true" aria-label="Scene 1 of 6">
+ *       <span class="hero__scene-indicator-fill"></span>
+ *     </button>
+ *     <!-- one button per scene -->
+ *   </div>
+ * </section>
+ *
+ * The poster <img> and the <video> both always exist in the DOM: the
+ * poster sits behind the video and is what actually shows whenever video
+ * doesn't play (prefers-reduced-motion, autoplay blocked, save-data) —
+ * this satisfies the brief's "poster/fallback image" requirement without
+ * needing any JS feature-detection.
+ *
+ * @package Vistula_Travel
+ */
+
+.hero {
+	position: relative;
+	overflow: hidden;
+	min-height: 100svh;
+	display: flex;
+	align-items: flex-end;
+	color: var(--vistula-color-text-on-dark);
+}
+
+/* ---------------------------------------------------------------
+ * Media layers — one absolutely-positioned box per scene, stacked;
+ * only .is-active is visible. Crossfade via opacity/transform only
+ * (brief §7: prefer opacity/transform, avoid anything layout-affecting).
+ * ------------------------------------------------------------- */
+
+.hero__media {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+}
+
+.hero__scene {
+	position: absolute;
+	inset: 0;
+	opacity: 0;
+	transform: scale(1.03);
+	transition:
+		opacity var(--vistula-duration-cinematic) var(--vistula-ease-editorial),
+		transform calc(var(--vistula-duration-cinematic) * 1.4) var(--vistula-ease-editorial);
+}
+
+.hero__scene.is-active {
+	opacity: 1;
+	transform: scale(1);
+}
+
+.hero__poster,
+.hero__video {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+/* The poster sits above the video by default, so a scene with no working
+   video still shows a correct image with zero extra markup/JS. Once a
+   scene's video is actually able to play, Stage 14's JS adds
+   `.has-video` to that .hero__scene to reveal it. */
+.hero__scene .hero__video {
+	opacity: 0;
+}
+
+.hero__scene.has-video .hero__video {
+	opacity: 1;
+}
+
+.hero__scene.has-video .hero__poster {
+	/* Kept in the DOM (never `display:none`) so it's still the fallback
+	   the instant .has-video is removed (e.g. playback error). */
+	opacity: 0;
+}
+
+/* prefers-reduced-motion: no autoplaying video, no scale/opacity motion
+   on scene change — the active scene's poster shows, full stop. Manual
+   scene selection (via the indicator buttons) still works; base.css's
+   global rule already collapses the transition above to ~0ms, so this
+   only needs to guarantee video itself never becomes visible. */
+@media (prefers-reduced-motion: reduce) {
+	.hero__scene.has-video .hero__video {
+		opacity: 0;
+	}
+
+	.hero__scene.has-video .hero__poster {
+		opacity: 1;
+	}
+}
+
+/* Controlled dark/gradient overlay — text contrast over any photo/video,
+   independent of how bright the specific scene's footage is. */
+.hero__overlay {
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(
+		to top,
+		rgba(27, 27, 24, 0.85) 0%,
+		rgba(27, 27, 24, 0.45) 45%,
+		rgba(27, 27, 24, 0.05) 75%
+	);
+}
+
+/* ---------------------------------------------------------------
+ * Foreground content
+ * ------------------------------------------------------------- */
+
+.hero__content {
+	position: relative;
+	z-index: var(--vistula-z-hero-content);
+	width: 100%;
+	max-width: var(--vistula-container-max);
+	margin-inline: auto;
+	padding-inline: var(--vistula-container-padding);
+	padding-bottom: var(--vistula-space-2xl);
+	/* Mobile-safe composition: don't sit under a notch/home-indicator. */
+	padding-bottom: max(var(--vistula-space-2xl), env(safe-area-inset-bottom));
+}
+
+.hero__label {
+	display: block;
+	margin-bottom: var(--vistula-space-2xs);
+	color: var(--vistula-color-accent);
+}
+
+.hero__headline {
+	max-width: 20ch;
+	margin-bottom: var(--vistula-space-sm);
+	font-size: var(--vistula-text-hero);
+	line-height: var(--vistula-leading-tight);
+	color: var(--vistula-color-text-on-dark);
+}
+
+.hero__copy {
+	max-width: 42ch;
+	margin-bottom: var(--vistula-space-md);
+	font-size: var(--vistula-text-body-lg);
+	color: var(--vistula-color-text-muted-on-dark);
+}
+
+.hero__cta {
+	color: var(--vistula-color-text-on-dark);
+	font-size: var(--vistula-text-heading-sm);
+	font-family: var(--vistula-font-display);
+	text-decoration: none;
+}
+
+/* ---------------------------------------------------------------
+ * Scene indicator + per-scene progress. One control per scene; the
+ * inner "fill" animates while a scene is active, giving a visual
+ * countdown to the next scene. Stage 14's JS starts/stops it by
+ * toggling .is-active; the animation itself, and its neutralization
+ * under reduced motion, are both already handled here.
+ * ------------------------------------------------------------- */
+
+.hero__scene-indicator {
+	position: relative;
+	z-index: var(--vistula-z-hero-content);
+	display: flex;
+	justify-content: center;
+	gap: var(--vistula-space-xs);
+	width: 100%;
+	padding-bottom: var(--vistula-space-md);
+}
+
+.hero__scene-indicator-item {
+	position: relative;
+	width: 2.5rem;
+	height: 3px;
+	padding: 0;
+	background-color: rgba(246, 241, 231, 0.3);
+	border-radius: var(--vistula-radius-round);
+	overflow: hidden;
+	/* Still a real <button> — 44px touch target via padding trick below
+	   rather than inflating the visible bar. */
+}
+
+.hero__scene-indicator-item::before {
+	content: '';
+	position: absolute;
+	inset: -1.1rem -0.25rem; /* invisible touch-target padding */
+}
+
+.hero__scene-indicator-fill {
+	display: block;
+	height: 100%;
+	width: 0%;
+	background-color: var(--vistula-color-ivory);
+}
+
+.hero__scene-indicator-item.is-active .hero__scene-indicator-fill {
+	animation: vistula-hero-scene-progress var(--vistula-hero-scene-duration, 6000ms) linear forwards;
+}
+
+@keyframes vistula-hero-scene-progress {
+	from {
+		width: 0%;
+	}
+
+	to {
+		width: 100%;
+	}
+}
+
+.hero__scene-indicator-item:not(.is-active) .hero__scene-indicator-fill {
+	width: 0%;
+}
+
+/* ---------------------------------------------------------------
+ * Responsive positioning
+ * ------------------------------------------------------------- */
+
+@media (max-width: 767px) {
+	.hero {
+		align-items: flex-end;
+	}
+
+	.hero__headline {
+		max-width: 16ch;
+	}
+
+	.hero__copy {
+		display: none; /* headline + CTA only on small screens — brief: mobile-safe composition, not a shrunk desktop layout */
+	}
+
+	.hero__scene-indicator {
+		justify-content: flex-start;
+		padding-inline: var(--vistula-container-padding);
+		overflow-x: auto;
+	}
+}
+
+@media (min-width: 1440px) {
+	.hero__content {
+		padding-bottom: var(--vistula-space-3xl);
+	}
+}

@@ -11,16 +11,14 @@
  * License URI:           https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:           vistula-core
  *
- * Foundation only. Does NOT yet register the Tour/Destination CPTs, taxonomies,
- * settings page, or any content model — those are later stages in
- * docs/implementation-roadmap.md (Stage 3 Global Settings, Stage 5 Tours CMS,
- * Stage 8 Destinations, ...). This file establishes safe loading, the
- * data-access contract functions so the theme has something real to call
- * without being coupled to a field framework or raw get_option() calls
- * (docs/project-architecture.md §3.3, rule 2), the Local JSON integration
- * point for the field framework decided in TD-12 (Secure Custom Fields —
- * no field groups exist yet), and the Stage 2 content-policy baseline
- * (TD-41: comments disabled, author/tag archives noindex).
+ * Foundation only. Does NOT yet register the Tour/Destination CPTs or
+ * taxonomies — those are later stages in docs/implementation-roadmap.md
+ * (Stage 5 Tours CMS, Stage 8 Destinations, ...). This file establishes
+ * safe loading, the data-access contract functions (now backed by real
+ * storage for settings/page-roles — Stage 3, TD-17), the Local JSON
+ * integration point for the field framework decided in TD-12 (Secure
+ * Custom Fields — no field groups exist yet), and the Stage 2 content-
+ * policy baseline (TD-41: comments disabled, author/tag archives noindex).
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -72,6 +70,13 @@ function vistula_core_init(): void {
 	require_once VISTULA_CORE_DIR . 'src/Api/tours.php';
 	require_once VISTULA_CORE_DIR . 'src/Api/destinations.php';
 	require_once VISTULA_CORE_DIR . 'src/Api/translation.php';
+
+	// Stage 3: Global Settings (TD-17) — schema first (defines the
+	// defaults/sanitizer both the admin page and vistula_setting() need),
+	// then the admin page itself, then the page-roles bootstrap.
+	require_once VISTULA_CORE_DIR . 'src/Settings/schema.php';
+	require_once VISTULA_CORE_DIR . 'src/Settings/admin-page.php';
+	require_once VISTULA_CORE_DIR . 'src/Settings/page-roles-bootstrap.php';
 
 	// Field-framework integration (TD-12) — defines no fields, only wires
 	// where future field-group definitions will save to/load from.

@@ -1,15 +1,11 @@
 <?php
 /**
- * Data-access contract: global settings.
+ * Data-access contract: global settings — real implementation (TD-17).
  *
- * Real implementation (the Settings-API-backed `vistula_settings` option,
- * per docs/project-architecture.md §6.1) is Stage 3 — Global Settings, in
- * docs/implementation-roadmap.md. Until then this returns $default so
- * templates that call it behave sensibly (render nothing extra) rather than
- * erroring, WITHOUT inventing any company data.
- *
- * Templates must never call get_option() directly — this function (or a
- * later Settings class it delegates to) is the only sanctioned path.
+ * Reads from the `vistula_settings` option registered and sanitized in
+ * src/Settings/schema.php + src/Settings/admin-page.php. Templates must
+ * never call get_option() directly — this is the only sanctioned path,
+ * per docs/project-architecture.md §6.1.
  *
  * @package Vistula_Core
  */
@@ -22,15 +18,44 @@ if ( ! function_exists( 'vistula_setting' ) ) {
 	/**
 	 * Read a single global setting (company info, CTA, social links, etc.).
 	 *
-	 * @param string $key     Setting key — see docs/data-model.md §13 for the
-	 *                        full catalogue once it's implemented.
-	 * @param mixed  $default Value to return until Stage 3 implements real storage.
+	 * Missing keys fall back to the schema's own default (not just
+	 * $default) so that a field added to the schema after a site's
+	 * `vistula_settings` option was first saved still behaves correctly —
+	 * $default is only used for a key that isn't in the schema at all.
+	 *
+	 * @param string $key     Setting key — see docs/data-model.md §13 for the full catalogue.
+	 * @param mixed  $default Value to return if $key is not a known setting at all.
 	 * @return mixed
 	 */
 	function vistula_setting( string $key, mixed $default = null ): mixed {
-		// TODO(Stage 3): read from the `vistula_settings` option via the
-		// Settings API, per docs/project-architecture.md §6.1. Left
-		// unimplemented on purpose — no invented company data belongs here.
-		return $default;
+		static $settings = null;
+
+		if ( null === $settings ) {
+			$settings = wp_parse_args( get_option( 'vistula_settings', array() ), vistula_core_settings_defaults() );
+		}
+
+		return array_key_exists( $key, $settings ) ? $settings[ $key ] : $default;
+	}
+}
+
+if ( ! function_exists( 'vistula_formatted_address' ) ) {
+	/**
+	 * Compose the four structured address fields (data-model.md §13 — kept
+	 * structured, not a single field, so JSON-LD's PostalAddress can use
+	 * them individually per architecture §6.2) into one display line.
+	 *
+	 * @return string Empty string if no address fields are set at all.
+	 */
+	function vistula_formatted_address(): string {
+		$parts = array_filter(
+			array(
+				vistula_setting( 'address_street', '' ),
+				vistula_setting( 'address_postcode', '' ) . ' ' . vistula_setting( 'address_city', '' ),
+				vistula_setting( 'address_country', '' ),
+			),
+			static fn( string $part ): bool => '' !== trim( $part )
+		);
+
+		return implode( ', ', array_map( 'trim', $parts ) );
 	}
 }

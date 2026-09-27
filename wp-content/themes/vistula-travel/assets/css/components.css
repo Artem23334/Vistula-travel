@@ -1,0 +1,388 @@
+/**
+ * Vistula Travel — Core UI components.
+ *
+ * Reusable, content-agnostic building blocks. Nothing in this file
+ * assumes a specific page (Tour, Destination, Homepage, ...) — those
+ * stages compose these classes, they don't extend this file.
+ *
+ * @package Vistula_Travel
+ */
+
+/* ---------------------------------------------------------------
+ * Buttons
+ * ------------------------------------------------------------- */
+
+.btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--vistula-space-3xs);
+	min-height: 2.75rem; /* touch target */
+	padding-block: var(--vistula-space-2xs);
+	padding-inline: var(--vistula-space-md);
+	font-size: var(--vistula-text-label);
+	font-weight: var(--vistula-weight-semibold);
+	letter-spacing: var(--vistula-tracking-label);
+	text-transform: uppercase;
+	text-decoration: none;
+	border: var(--vistula-border-width) solid transparent;
+	border-radius: var(--vistula-radius-sm);
+	transition: background-color var(--vistula-duration-base) var(--vistula-ease-standard),
+		color var(--vistula-duration-base) var(--vistula-ease-standard),
+		border-color var(--vistula-duration-base) var(--vistula-ease-standard);
+}
+
+.btn--primary,
+.site-header__cta {
+	background-color: var(--vistula-color-brand);
+	border-color: var(--vistula-color-brand);
+	color: var(--vistula-color-ivory);
+}
+
+.btn--primary:hover,
+.site-header__cta:hover {
+	background-color: var(--vistula-color-brand-deep);
+	border-color: var(--vistula-color-brand-deep);
+}
+
+.btn--secondary {
+	background-color: transparent;
+	border-color: currentColor;
+	color: var(--vistula-color-text);
+}
+
+.btn--secondary:hover {
+	background-color: var(--vistula-color-surface-alt);
+}
+
+/* On a dark section (Hero, .section--inverse, .site-footer), a secondary
+   button needs ivory text/border instead of graphite. */
+.is-on-dark .btn--secondary {
+	color: var(--vistula-color-ivory);
+}
+
+.is-on-dark .btn--secondary:hover {
+	background-color: rgba(246, 241, 231, 0.1);
+}
+
+/* Text links — used in body copy and metadata, distinct from buttons. */
+.link {
+	color: var(--vistula-color-brand);
+	text-decoration-color: var(--vistula-color-border);
+	text-underline-offset: 0.2em;
+	transition: text-decoration-color var(--vistula-duration-base) var(--vistula-ease-standard);
+}
+
+.link:hover {
+	text-decoration-color: currentColor;
+}
+
+/* An arrow-suffixed link style — e.g. "Explore Gdańsk →" in the Hero and
+   card footers. The arrow is a real character, not an icon font/SVG. */
+.link--arrow::after {
+	content: '\2192'; /* → */
+	display: inline-block;
+	margin-inline-start: var(--vistula-space-3xs);
+	transition: transform var(--vistula-duration-base) var(--vistula-ease-standard);
+}
+
+.link--arrow:hover::after {
+	transform: translateX(0.25em);
+}
+
+/* ---------------------------------------------------------------
+ * Section headings
+ * ------------------------------------------------------------- */
+
+.section-heading {
+	max-width: var(--vistula-container-narrow);
+	margin-bottom: var(--vistula-space-lg);
+}
+
+.section-heading__eyebrow {
+	display: block;
+	margin-bottom: var(--vistula-space-2xs);
+	color: var(--vistula-color-accent);
+}
+
+.section-heading__title {
+	margin: 0;
+}
+
+.section-heading__intro {
+	margin-top: var(--vistula-space-2xs);
+	color: var(--vistula-color-text-muted);
+	max-width: 60ch;
+}
+
+/* ---------------------------------------------------------------
+ * Badges / labels / metadata
+ * ------------------------------------------------------------- */
+
+.badge {
+	display: inline-flex;
+	align-items: center;
+	padding-block: var(--vistula-space-3xs);
+	padding-inline: var(--vistula-space-2xs);
+	font-size: var(--vistula-text-caption);
+	font-weight: var(--vistula-weight-semibold);
+	letter-spacing: var(--vistula-tracking-label);
+	text-transform: uppercase;
+	background-color: var(--vistula-color-surface-alt);
+	color: var(--vistula-color-text);
+	border-radius: var(--vistula-radius-sm);
+}
+
+.badge--accent {
+	background-color: var(--vistula-color-accent);
+	color: var(--vistula-color-graphite);
+}
+
+.meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--vistula-space-sm);
+	font-size: var(--vistula-text-caption);
+	color: var(--vistula-color-text-muted);
+}
+
+.meta__item {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--vistula-space-3xs);
+}
+
+/* ---------------------------------------------------------------
+ * Media containers — fixed-ratio boxes for photography, per
+ * docs/project-architecture.md §7 (card 4:3, hero 16:9, square 1:1).
+ * `object-fit: cover` only here, never applied blanket per that section.
+ * ------------------------------------------------------------- */
+
+.media {
+	position: relative;
+	overflow: hidden;
+	background-color: var(--vistula-color-surface-alt); /* visible while an image loads */
+}
+
+.media img,
+.media video {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.media--ratio-4-3 {
+	aspect-ratio: 4 / 3;
+}
+
+.media--ratio-16-9 {
+	aspect-ratio: 16 / 9;
+}
+
+.media--ratio-1-1 {
+	aspect-ratio: 1 / 1;
+}
+
+/* ---------------------------------------------------------------
+ * Cards — Tour cards, Destination cards share one base; a modifier
+ * changes only the aspect ratio and badge placement, not the structure.
+ * ------------------------------------------------------------- */
+
+.card {
+	display: flex;
+	flex-direction: column;
+	background-color: var(--vistula-color-surface);
+	transition: box-shadow var(--vistula-duration-base) var(--vistula-ease-standard);
+}
+
+.card:hover {
+	box-shadow: var(--vistula-shadow-md);
+}
+
+.card__media {
+	position: relative;
+}
+
+.card__badge {
+	position: absolute;
+	top: var(--vistula-space-2xs);
+	left: var(--vistula-space-2xs);
+}
+
+.card__body {
+	padding-block: var(--vistula-space-sm);
+}
+
+.card__title {
+	margin: 0 0 var(--vistula-space-3xs);
+	font-size: var(--vistula-text-heading-sm);
+}
+
+.card__excerpt {
+	margin: 0 0 var(--vistula-space-2xs);
+	color: var(--vistula-color-text-muted);
+	max-width: none;
+}
+
+.card--tour .card__media {
+	aspect-ratio: 4 / 3; /* architecture §7 tour-card ratio */
+}
+
+.card--destination .card__media {
+	aspect-ratio: 1 / 1; /* architecture §7 square ratio */
+}
+
+/* ---------------------------------------------------------------
+ * CTA band — a full-width call-to-action section (e.g. Homepage's CTA
+ * section, per architecture §13.1). Content-agnostic; a later stage
+ * supplies the heading/button.
+ * ------------------------------------------------------------- */
+
+.cta-band {
+	text-align: center;
+	padding-block: var(--vistula-space-2xl);
+}
+
+.cta-band__title {
+	margin-bottom: var(--vistula-space-sm);
+}
+
+/* ---------------------------------------------------------------
+ * Forms — contact form (Stage 9) and any future filter form (Stage 5)
+ * both consume these; nothing form-specific to either lives here.
+ * ------------------------------------------------------------- */
+
+.form-field {
+	display: flex;
+	flex-direction: column;
+	gap: var(--vistula-space-3xs);
+	margin-bottom: var(--vistula-space-sm);
+}
+
+.form-field__label {
+	font-size: var(--vistula-text-label);
+	font-weight: var(--vistula-weight-medium);
+}
+
+.form-field__hint,
+.form-field__error {
+	font-size: var(--vistula-text-caption);
+}
+
+.form-field__error {
+	color: var(--vistula-color-state-error);
+}
+
+input[type='text'],
+input[type='email'],
+input[type='tel'],
+input[type='search'],
+input[type='date'],
+input[type='time'],
+input[type='number'],
+input[type='url'],
+select,
+textarea {
+	width: 100%;
+	min-height: 2.75rem;
+	padding-block: var(--vistula-space-2xs);
+	padding-inline: var(--vistula-space-xs);
+	font: inherit;
+	font-size: var(--vistula-text-body);
+	color: var(--vistula-color-text);
+	background-color: var(--vistula-color-surface);
+	border: var(--vistula-border-width) solid var(--vistula-color-border);
+	border-radius: var(--vistula-radius-sm);
+	transition: border-color var(--vistula-duration-base) var(--vistula-ease-standard);
+}
+
+textarea {
+	min-height: 8rem;
+	resize: vertical;
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+	border-color: var(--vistula-color-muted);
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+	border-color: var(--vistula-focus-color);
+}
+
+.form-field--error input,
+.form-field--error select,
+.form-field--error textarea {
+	border-color: var(--vistula-color-state-error);
+}
+
+/* ---------------------------------------------------------------
+ * Pagination
+ * ------------------------------------------------------------- */
+
+.pagination {
+	display: flex;
+	justify-content: center;
+	gap: var(--vistula-space-2xs);
+	margin-top: var(--vistula-space-lg);
+}
+
+.pagination__link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 2.75rem;
+	min-height: 2.75rem;
+	text-decoration: none;
+	border: var(--vistula-border-width) solid var(--vistula-color-border);
+	border-radius: var(--vistula-radius-sm);
+}
+
+.pagination__link:hover {
+	border-color: var(--vistula-color-muted);
+}
+
+.pagination__link.is-current {
+	background-color: var(--vistula-color-brand);
+	border-color: var(--vistula-color-brand);
+	color: var(--vistula-color-ivory);
+}
+
+/* ---------------------------------------------------------------
+ * Generic entry/page content — the classes page.php, single.php,
+ * index.php and 404.php already output (Stage 2). Keeps ordinary
+ * WordPress Pages/Posts legible before any page-specific template
+ * exists.
+ * ------------------------------------------------------------- */
+
+.entry-header,
+.page-header {
+	max-width: var(--vistula-container-narrow);
+	margin-inline: auto;
+	margin-bottom: var(--vistula-space-md);
+	padding-inline: var(--vistula-container-padding);
+	padding-top: var(--vistula-space-lg);
+	text-align: center;
+}
+
+.entry-content,
+.page-content,
+.entry-summary {
+	max-width: var(--vistula-container-narrow);
+	margin-inline: auto;
+	padding-inline: var(--vistula-container-padding);
+	padding-bottom: var(--vistula-space-lg);
+}
+
+.entry-meta {
+	font-size: var(--vistula-text-caption);
+	color: var(--vistula-color-text-muted);
+}
+
+.error-404 {
+	text-align: center;
+	padding-block: var(--vistula-space-2xl);
+}

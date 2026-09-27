@@ -44,7 +44,7 @@ $vistula_social_links = vistula_setting( 'social_links', array() );
 			?>
 		</p>
 		<address class="site-footer__address">
-			<?php echo esc_html( (string) vistula_setting( 'address', '' ) ); ?>
+			<?php echo esc_html( vistula_formatted_address() ); ?>
 		</address>
 	</div>
 

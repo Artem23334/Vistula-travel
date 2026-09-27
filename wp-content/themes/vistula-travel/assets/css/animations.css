@@ -1,0 +1,76 @@
+/**
+ * Vistula Travel — Animation language.
+ *
+ * The restrained motion vocabulary the brief (§7) asks for, made explicit
+ * and reusable rather than left implicit inside individual components.
+ * Everything here uses only opacity/transform (compositor-friendly, never
+ * triggers layout) and reads its timing from tokens.css — no component
+ * should declare its own transition-duration/easing value.
+ *
+ * What's already using this vocabulary elsewhere in the system:
+ * - Hero scene crossfade (hero.css) — opacity + transform: scale, cinematic duration/easing
+ * - Card hover (components.css) — box-shadow only, no movement
+ * - Button/link hover (components.css) — color/background only
+ * - Mobile nav open/close (header-footer.css) — opacity + transform: translateY
+ *
+ * `.u-reveal` below is the one *new* primitive this file adds: a
+ * scroll-triggered fade-up, for later content sections (Popular Tours,
+ * Destinations grid, ...) to use once they exist.
+ *
+ * Safety design (important): `.u-reveal` elements are NOT hidden by
+ * default. They only become hidden-then-revealed once a `js-ready`
+ * class is present on <html> — a single class a future Stage 14 JS
+ * layer adds once it has actually attached its IntersectionObserver.
+ * This means: no JS yet (today) → `.u-reveal` content is plain, fully
+ * visible content, exactly as if this class didn't exist. JS present
+ * but hasn't run yet → same, still visible, until the observer is
+ * ready to reveal it. This avoids the classic scroll-reveal bug where
+ * content silently disappears if JS fails to load — nothing here can
+ * hide essential content without JS itself opting in first.
+ *
+ * Explicitly avoided, per the brief: parallax, animating more than one
+ * or two properties per element, any animation without a
+ * prefers-reduced-motion escape hatch (base.css's global override
+ * already neutralizes everything below), and any frontend animation
+ * library — this file is ~30 rules of plain CSS.
+ *
+ * @package Vistula_Travel
+ */
+
+.js-ready .u-reveal {
+	opacity: 0;
+	transform: translateY(1.5rem);
+	transition:
+		opacity var(--vistula-duration-slow) var(--vistula-ease-editorial),
+		transform var(--vistula-duration-slow) var(--vistula-ease-editorial);
+}
+
+.js-ready .u-reveal.is-visible {
+	opacity: 1;
+	transform: none;
+}
+
+/* A small stagger for a group of siblings revealing together (e.g. a
+   card grid) — applied via a modifier class per position, not inline
+   styles, so it stays out of PHP entirely. Capped at 4 steps: a longer
+   stagger reads as sluggish rather than premium. */
+.js-ready .u-reveal.u-reveal--delay-1 {
+	transition-delay: 80ms;
+}
+
+.js-ready .u-reveal.u-reveal--delay-2 {
+	transition-delay: 160ms;
+}
+
+.js-ready .u-reveal.u-reveal--delay-3 {
+	transition-delay: 240ms;
+}
+
+/* Reduced motion: content must appear immediately even once js-ready is
+   present — never rely on JS alone to reveal essential content. */
+@media (prefers-reduced-motion: reduce) {
+	.js-ready .u-reveal {
+		opacity: 1;
+		transform: none;
+	}
+}

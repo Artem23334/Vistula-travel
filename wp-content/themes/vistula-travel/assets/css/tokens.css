@@ -1,0 +1,175 @@
+/**
+ * Vistula Travel — Design tokens.
+ *
+ * Every custom property the rest of the design system uses lives here.
+ * No component file should invent a one-off color, size, or duration —
+ * if a value is needed twice, it belongs here as a token.
+ *
+ * Visual direction (Stage 4 brief): cinematic, editorial, premium, natural.
+ * Restrained decoration — small/no border-radius, subtle low-opacity
+ * shadows, no gradients beyond the Hero's own dark overlay. Poland is
+ * communicated through photography and destinations, never through flag
+ * colors or literal tourism-cliché motifs.
+ *
+ * Naming: `--vistula-<group>-<name>`. Values here are intentionally
+ * duplicated (not read via var()) in theme.json's block-editor presets —
+ * theme.json cannot reference external custom properties, so if you
+ * change a color/font-size here, update theme.json's matching slug too
+ * (see the comment above each palette/fontSizes entry there).
+ *
+ * Breakpoints are plain documentation here, not usable CSS custom
+ * properties — native CSS cannot use var() inside an @media condition.
+ * Every file in this system uses these four literal values consistently:
+ *   sm: 600px   (large phones / small tablets, portrait)
+ *   md: 768px   (tablets)
+ *   lg: 1024px  (small desktops / landscape tablets)
+ *   xl: 1440px  (large desktops)
+ * Mobile-first: unprefixed rules are the mobile baseline; every
+ * `@media (min-width: …)` rule in this system layers on top of it.
+ *
+ * @package Vistula_Travel
+ */
+
+:root {
+	/* ---------------------------------------------------------------
+	 * Color — Graphite / Warm Ivory / Forest Green / Muted Warm Gold.
+	 * Each base color has one tint/shade pair for hover/surface use,
+	 * so components never invent an ad-hoc lighter/darker variant.
+	 * ------------------------------------------------------------- */
+	--vistula-color-graphite: #1b1b18;
+	--vistula-color-graphite-soft: #3a3a35; /* raised surfaces on a dark background */
+	--vistula-color-ivory: #f6f1e7;
+	--vistula-color-ivory-dim: #e7dfcf; /* raised surfaces on a light background */
+	--vistula-color-forest: #2b4438;
+	--vistula-color-forest-deep: #1c2f26; /* hover/active state for forest-on-light */
+	--vistula-color-gold: #b08a4e;
+	--vistula-color-gold-deep: #8f6f3b; /* hover/active state for gold */
+
+	/* Neutrals derived from graphite/ivory, for borders and secondary text. */
+	--vistula-color-border: #d8cfba; /* on ivory */
+	--vistula-color-border-on-dark: rgba(246, 241, 231, 0.24);
+	--vistula-color-muted: #6b6a63; /* secondary text on ivory */
+	--vistula-color-muted-on-dark: rgba(246, 241, 231, 0.72); /* secondary text on graphite */
+
+	/* Restrained state colors — desaturated, consistent with the palette;
+	   never a stock bright red/green. Used only where forms need them. */
+	--vistula-color-state-error: #8a3b2c;
+	--vistula-color-state-success: var(--vistula-color-forest);
+
+	/* Semantic aliases — components reference these, not the raw palette,
+	   so a future re-theme changes meaning in one place. */
+	--vistula-color-surface: var(--vistula-color-ivory);
+	--vistula-color-surface-alt: var(--vistula-color-ivory-dim);
+	--vistula-color-surface-inverse: var(--vistula-color-graphite);
+	--vistula-color-text: var(--vistula-color-graphite);
+	--vistula-color-text-muted: var(--vistula-color-muted);
+	--vistula-color-text-on-dark: var(--vistula-color-ivory);
+	--vistula-color-text-muted-on-dark: var(--vistula-color-muted-on-dark);
+	--vistula-color-accent: var(--vistula-color-gold);
+	--vistula-color-accent-deep: var(--vistula-color-gold-deep);
+	--vistula-color-brand: var(--vistula-color-forest);
+	--vistula-color-brand-deep: var(--vistula-color-forest-deep);
+
+	/* ---------------------------------------------------------------
+	 * Typography.
+	 * No custom font files are loaded yet — see assets/css/base.css's
+	 * top comment for why, and the Stage 4 report's "unresolved
+	 * decisions" section. These stacks are deliberately broad-coverage
+	 * system-font stacks (Latin Extended-A + Cyrillic already present
+	 * on all major OSes) so PL/RU/UK text renders correctly today and
+	 * the token/value can be swapped for a self-hosted @font-face family
+	 * later without touching any component file.
+	 * ------------------------------------------------------------- */
+	--vistula-font-display: 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, Georgia, serif;
+	--vistula-font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+	/* Fluid type scale — clamp() so headings scale smoothly between the
+	   mobile and desktop sizes below without a wall of breakpoint
+	   overrides. Ratio is intentionally irregular (editorial, not a
+	   rigid modular scale) to match display vs. text roles. */
+	--vistula-text-caption: 0.8125rem; /* 13px — metadata, timestamps */
+	--vistula-text-label: 0.875rem; /* 14px — nav, buttons, badges */
+	--vistula-text-body-sm: 0.9375rem; /* 15px */
+	--vistula-text-body: 1rem; /* 16px */
+	--vistula-text-body-lg: clamp(1.125rem, 1rem + 0.4vw, 1.25rem);
+	--vistula-text-heading-sm: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+	--vistula-text-heading-md: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+	--vistula-text-heading-lg: clamp(2rem, 1.6rem + 1.8vw, 3rem);
+	--vistula-text-display: clamp(2.5rem, 1.9rem + 2.6vw, 4rem);
+	--vistula-text-hero: clamp(2.75rem, 2rem + 4vw, 6rem);
+
+	--vistula-leading-tight: 1.1;
+	--vistula-leading-heading: 1.25;
+	--vistula-leading-body: 1.6; /* generous — Cyrillic/Polish diacritics need more vertical room */
+	--vistula-tracking-label: 0.08em; /* uppercase eyebrow/label tracking */
+
+	--vistula-weight-regular: 400;
+	--vistula-weight-medium: 500;
+	--vistula-weight-semibold: 600;
+
+	/* ---------------------------------------------------------------
+	 * Spacing — one scale, used for padding, margin, and gaps alike.
+	 * ------------------------------------------------------------- */
+	--vistula-space-3xs: 0.25rem; /* 4px */
+	--vistula-space-2xs: 0.5rem; /* 8px */
+	--vistula-space-xs: 0.75rem; /* 12px */
+	--vistula-space-sm: 1rem; /* 16px */
+	--vistula-space-md: 1.5rem; /* 24px */
+	--vistula-space-lg: 2.5rem; /* 40px */
+	--vistula-space-xl: 4rem; /* 64px */
+	--vistula-space-2xl: 6rem; /* 96px */
+	--vistula-space-3xl: 9rem; /* 144px */
+
+	/* ---------------------------------------------------------------
+	 * Layout.
+	 * ------------------------------------------------------------- */
+	--vistula-container-max: 80rem; /* 1280px */
+	--vistula-container-narrow: 48rem; /* 768px — readable measure for long-form text */
+	--vistula-container-padding: var(--vistula-space-sm);
+
+	/* ---------------------------------------------------------------
+	 * Borders & radius — restrained by design (brief: avoid "excessive
+	 * rounded cards"). Sharp/near-sharp corners are the premium-editorial
+	 * choice here, not an oversight.
+	 * ------------------------------------------------------------- */
+	--vistula-border-width: 1px;
+	--vistula-radius-sm: 2px;
+	--vistula-radius-md: 4px;
+	--vistula-radius-round: 999px; /* pills/dots only — scene indicators, badges */
+
+	/* ---------------------------------------------------------------
+	 * Shadows — subtle, used sparingly (cards on hover, elevated panels).
+	 * Never used for decoration alone.
+	 * ------------------------------------------------------------- */
+	--vistula-shadow-sm: 0 1px 2px rgba(27, 27, 24, 0.06), 0 1px 1px rgba(27, 27, 24, 0.04);
+	--vistula-shadow-md: 0 8px 24px rgba(27, 27, 24, 0.10), 0 2px 6px rgba(27, 27, 24, 0.06);
+
+	/* ---------------------------------------------------------------
+	 * Motion — restrained, cinematic. See assets/css/base.css for the
+	 * prefers-reduced-motion override that neutralizes all of this.
+	 * ------------------------------------------------------------- */
+	--vistula-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+	--vistula-ease-editorial: cubic-bezier(0.16, 1, 0.3, 1); /* slow-start, soft-settle — used for the Hero */
+	--vistula-duration-fast: 150ms;
+	--vistula-duration-base: 250ms;
+	--vistula-duration-slow: 450ms;
+	--vistula-duration-cinematic: 1200ms; /* Hero scene transitions */
+
+	/* ---------------------------------------------------------------
+	 * Focus — one ring style, two color variants (light vs. dark
+	 * background) so focus is always visible regardless of what a
+	 * component sits on (e.g. the Hero's CTA sits on video, not ivory).
+	 * ------------------------------------------------------------- */
+	--vistula-focus-width: 2px;
+	--vistula-focus-offset: 2px;
+	--vistula-focus-color: var(--vistula-color-forest);
+	--vistula-focus-color-on-dark: var(--vistula-color-gold);
+
+	/* ---------------------------------------------------------------
+	 * Z-index scale — named, so stacking order is decided once.
+	 * ------------------------------------------------------------- */
+	--vistula-z-header: 100;
+	--vistula-z-overlay: 200;
+	--vistula-z-hero-content: 10;
+	--vistula-z-skip-link: 1000;
+}
