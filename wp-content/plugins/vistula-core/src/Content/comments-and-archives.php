@@ -61,7 +61,7 @@ add_action( 'admin_menu', 'vistula_core_remove_comments_admin_menu' );
 function vistula_core_remove_comments_admin_bar( \WP_Admin_Bar $wp_admin_bar ): void {
 	$wp_admin_bar->remove_node( 'comments' );
 }
-add_action( 'wp_before_admin_bar_render', 'vistula_core_remove_comments_admin_bar' );
+add_action( 'admin_bar_menu', 'vistula_core_remove_comments_admin_bar', 100 );
 
 /**
  * Noindex author archives and tag archives (TD-41). The site has no
