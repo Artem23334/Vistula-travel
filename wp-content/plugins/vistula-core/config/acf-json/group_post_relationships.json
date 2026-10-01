@@ -1,0 +1,58 @@
+{
+	"key": "group_post_relationships",
+	"title": "Travel Guide \u2014 Related Tours & Destinations",
+	"fields": [
+		{
+			"key": "field_post_relationships_tours",
+			"label": "Related tours",
+			"name": "post_tours",
+			"type": "relationship",
+			"required": 0,
+			"post_type": [
+				"tour"
+			],
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": 0,
+			"max": 0,
+			"return_format": "id"
+		},
+		{
+			"key": "field_post_relationships_destinations",
+			"label": "Related destinations",
+			"name": "post_destinations",
+			"type": "relationship",
+			"instructions": "An article can span places \u2014 multi-value, with the first entry treated as primary.",
+			"required": 0,
+			"post_type": [
+				"destination"
+			],
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": 0,
+			"max": 0,
+			"return_format": "id"
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "post_type",
+				"operator": "==",
+				"value": "post"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"show_in_rest": 1
+}

@@ -1,0 +1,61 @@
+{
+	"key": "group_destination_highlights",
+	"title": "Destination \u2014 Highlights & Tips",
+	"fields": [
+		{
+			"key": "field_destination_highlights_items",
+			"label": "Highlights",
+			"name": "destination_highlights",
+			"type": "repeater",
+			"required": 0,
+			"layout": "table",
+			"button_label": "Add highlight",
+			"min": 0,
+			"sub_fields": [
+				{
+					"key": "field_destination_highlights_text",
+					"label": "Text",
+					"name": "text",
+					"type": "text",
+					"required": 1
+				}
+			]
+		},
+		{
+			"key": "field_destination_travel_tips_items",
+			"label": "Travel tips",
+			"name": "destination_travel_tips",
+			"type": "repeater",
+			"required": 0,
+			"layout": "table",
+			"button_label": "Add tip",
+			"min": 0,
+			"sub_fields": [
+				{
+					"key": "field_destination_travel_tips_text",
+					"label": "Text",
+					"name": "text",
+					"type": "text",
+					"required": 1
+				}
+			]
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "post_type",
+				"operator": "==",
+				"value": "destination"
+			}
+		]
+	],
+	"menu_order": 1,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"show_in_rest": 1
+}

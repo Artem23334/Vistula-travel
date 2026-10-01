@@ -1,0 +1,41 @@
+{
+	"key": "group_destination_curation",
+	"title": "Destination \u2014 Curation",
+	"fields": [
+		{
+			"key": "field_destination_curation_featured_tours",
+			"label": "Featured tours (override)",
+			"name": "destination_featured_tours",
+			"type": "relationship",
+			"instructions": "Optional editorial override of display order. If left empty, the tours shown for this destination are simply every published tour linked to it (derived from each tour's own Destinations field) in their default order.",
+			"required": 0,
+			"post_type": [
+				"tour"
+			],
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": 0,
+			"max": 0,
+			"return_format": "id"
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "post_type",
+				"operator": "==",
+				"value": "destination"
+			}
+		]
+	],
+	"menu_order": 5,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"show_in_rest": 1
+}

@@ -1,0 +1,71 @@
+{
+	"key": "group_tour_itinerary",
+	"title": "Tour \u2014 Itinerary",
+	"fields": [
+		{
+			"key": "field_tour_itinerary_items",
+			"label": "Itinerary",
+			"name": "tour_itinerary",
+			"type": "repeater",
+			"instructions": "Rows are grouped and displayed by Day on the front end.",
+			"required": 0,
+			"layout": "block",
+			"button_label": "Add itinerary item",
+			"min": 0,
+			"sub_fields": [
+				{
+					"key": "field_tour_itinerary_day",
+					"label": "Day",
+					"name": "day",
+					"type": "number",
+					"instructions": "1 for a single-day tour; increases for each day of a multi-day tour.",
+					"required": 1,
+					"default_value": 1,
+					"min": 1,
+					"step": 1
+				},
+				{
+					"key": "field_tour_itinerary_time",
+					"label": "Time",
+					"name": "time",
+					"type": "time_picker",
+					"required": 0,
+					"display_format": "H:i",
+					"return_format": "H:i"
+				},
+				{
+					"key": "field_tour_itinerary_title",
+					"label": "Title",
+					"name": "title",
+					"type": "text",
+					"required": 1
+				},
+				{
+					"key": "field_tour_itinerary_description",
+					"label": "Description",
+					"name": "description",
+					"type": "textarea",
+					"required": 0,
+					"rows": 2
+				}
+			]
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "post_type",
+				"operator": "==",
+				"value": "tour"
+			}
+		]
+	],
+	"menu_order": 4,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"show_in_rest": 1
+}

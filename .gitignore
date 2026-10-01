@@ -48,3 +48,4 @@ debug.log
 
 # --- Local mail-catcher data, if any is written to disk ---
 /mailcatcher/
+vendor/

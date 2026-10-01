@@ -1,0 +1,60 @@
+{
+	"key": "group_destination_general",
+	"title": "Destination \u2014 General",
+	"fields": [
+		{
+			"key": "field_destination_general_hero_image",
+			"label": "Hero image (override)",
+			"name": "destination_hero_image",
+			"type": "image",
+			"instructions": "Optional 16:9 image. Falls back to the Featured Image if left empty.",
+			"required": 0,
+			"return_format": "id",
+			"preview_size": "medium"
+		},
+		{
+			"key": "field_destination_general_gallery",
+			"label": "Gallery",
+			"name": "destination_gallery",
+			"type": "gallery",
+			"required": 0,
+			"return_format": "id",
+			"min": 0,
+			"max": 12,
+			"preview_size": "thumbnail"
+		},
+		{
+			"key": "field_destination_general_type",
+			"label": "Place type",
+			"name": "destination_type",
+			"type": "select",
+			"instructions": "Distinguishes cities from regions like Masuria.",
+			"required": 1,
+			"choices": {
+				"city": "City",
+				"region": "Region"
+			},
+			"default_value": "city",
+			"allow_null": 0,
+			"multiple": 0,
+			"ui": 1
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "post_type",
+				"operator": "==",
+				"value": "destination"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"show_in_rest": 1
+}

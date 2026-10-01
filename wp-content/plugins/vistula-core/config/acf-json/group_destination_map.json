@@ -1,0 +1,44 @@
+{
+	"key": "group_destination_map",
+	"title": "Destination \u2014 Map",
+	"fields": [
+		{
+			"key": "field_destination_map_lat",
+			"label": "Latitude",
+			"name": "destination_lat",
+			"type": "number",
+			"required": 0,
+			"min": -90,
+			"max": 90,
+			"step": "0.000001"
+		},
+		{
+			"key": "field_destination_map_lng",
+			"label": "Longitude",
+			"name": "destination_lng",
+			"type": "number",
+			"instructions": "Embedded maps are TO EVALUATE (TD-48) \u2014 a text location + external map link is always available regardless of this decision.",
+			"required": 0,
+			"min": -180,
+			"max": 180,
+			"step": "0.000001"
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "post_type",
+				"operator": "==",
+				"value": "destination"
+			}
+		]
+	],
+	"menu_order": 3,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"show_in_rest": 1
+}

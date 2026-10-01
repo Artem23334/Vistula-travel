@@ -1,0 +1,59 @@
+{
+	"key": "group_tour_relationships",
+	"title": "Tour \u2014 Relationships",
+	"fields": [
+		{
+			"key": "field_tour_relationships_destinations",
+			"label": "Destinations",
+			"name": "tour_destinations",
+			"type": "relationship",
+			"instructions": "The first destination selected is treated as the primary destination. Required to publish (data-model.md \u00a72.6) \u2014 the Destination post type doesn't exist until Stage 8, so this stays empty and the tour stays a draft until then; that is expected, not an error.",
+			"required": 0,
+			"post_type": [
+				"destination"
+			],
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": 0,
+			"max": 0,
+			"return_format": "id"
+		},
+		{
+			"key": "field_tour_relationships_faqs",
+			"label": "FAQs",
+			"name": "tour_faqs",
+			"type": "relationship",
+			"instructions": "Curated, ordered \u2014 the FAQ post type doesn't exist until Stage 5/9's FAQ work, so this stays empty until then.",
+			"required": 0,
+			"post_type": [
+				"faq"
+			],
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": 0,
+			"max": 0,
+			"return_format": "id"
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "post_type",
+				"operator": "==",
+				"value": "tour"
+			}
+		]
+	],
+	"menu_order": 6,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"show_in_rest": 1
+}

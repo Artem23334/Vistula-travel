@@ -1,0 +1,111 @@
+{
+	"key": "group_tour_content",
+	"title": "Tour \u2014 Content",
+	"fields": [
+		{
+			"key": "field_tour_content_highlights",
+			"label": "Highlights",
+			"name": "tour_highlights",
+			"type": "repeater",
+			"instructions": "3\u20136 items, one line each.",
+			"required": 1,
+			"layout": "table",
+			"button_label": "Add highlight",
+			"min": 0,
+			"sub_fields": [
+				{
+					"key": "field_tour_content_highlight_text",
+					"label": "Text",
+					"name": "text",
+					"type": "text",
+					"required": 1
+				}
+			]
+		},
+		{
+			"key": "field_tour_content_included",
+			"label": "What's included",
+			"name": "tour_included",
+			"type": "repeater",
+			"required": 1,
+			"layout": "table",
+			"button_label": "Add item",
+			"min": 0,
+			"sub_fields": [
+				{
+					"key": "field_tour_content_included_text",
+					"label": "Text",
+					"name": "text",
+					"type": "text",
+					"required": 1
+				}
+			]
+		},
+		{
+			"key": "field_tour_content_not_included",
+			"label": "What's not included",
+			"name": "tour_not_included",
+			"type": "repeater",
+			"required": 0,
+			"layout": "table",
+			"button_label": "Add item",
+			"min": 0,
+			"sub_fields": [
+				{
+					"key": "field_tour_content_not_included_text",
+					"label": "Text",
+					"name": "text",
+					"type": "text",
+					"required": 1
+				}
+			]
+		},
+		{
+			"key": "field_tour_content_what_to_bring",
+			"label": "What to bring",
+			"name": "tour_what_to_bring",
+			"type": "repeater",
+			"required": 0,
+			"layout": "table",
+			"button_label": "Add item",
+			"min": 0,
+			"sub_fields": [
+				{
+					"key": "field_tour_content_what_to_bring_text",
+					"label": "Text",
+					"name": "text",
+					"type": "text",
+					"required": 1
+				}
+			]
+		},
+		{
+			"key": "field_tour_content_important_info",
+			"label": "Important information",
+			"name": "tour_important_info",
+			"type": "wysiwyg",
+			"instructions": "Paragraphs, lists, and links only \u2014 keep the toolbar minimal.",
+			"required": 0,
+			"tabs": "visual",
+			"toolbar": "basic",
+			"media_upload": 0
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "post_type",
+				"operator": "==",
+				"value": "tour"
+			}
+		]
+	],
+	"menu_order": 3,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"show_in_rest": 1
+}

@@ -1,0 +1,166 @@
+{
+	"key": "group_tour_details",
+	"title": "Tour \u2014 Details",
+	"fields": [
+		{
+			"key": "field_tour_details_duration_value",
+			"label": "Duration",
+			"name": "tour_duration_value",
+			"type": "number",
+			"instructions": "e.g. 1, 2, 4.5",
+			"required": 1,
+			"min": 0,
+			"step": "0.5"
+		},
+		{
+			"key": "field_tour_details_duration_unit",
+			"label": "Duration unit",
+			"name": "tour_duration_unit",
+			"type": "select",
+			"required": 1,
+			"choices": {
+				"hours": "Hours",
+				"days": "Days"
+			},
+			"default_value": "days",
+			"allow_null": 0,
+			"multiple": 0,
+			"ui": 1
+		},
+		{
+			"key": "field_tour_details_meeting_point",
+			"label": "Meeting point",
+			"name": "tour_meeting_point",
+			"type": "textarea",
+			"instructions": "Human description of where the tour starts.",
+			"required": 1,
+			"rows": 2
+		},
+		{
+			"key": "field_tour_details_meeting_lat",
+			"label": "Meeting point latitude",
+			"name": "tour_meeting_lat",
+			"type": "number",
+			"required": 0,
+			"min": -90,
+			"max": 90,
+			"step": "0.000001"
+		},
+		{
+			"key": "field_tour_details_meeting_lng",
+			"label": "Meeting point longitude",
+			"name": "tour_meeting_lng",
+			"type": "number",
+			"required": 0,
+			"min": -180,
+			"max": 180,
+			"step": "0.000001"
+		},
+		{
+			"key": "field_tour_details_departure_time",
+			"label": "Departure time",
+			"name": "tour_departure_time",
+			"type": "time_picker",
+			"instructions": "Indicative \u2014 the booking system's slots take precedence once it exists.",
+			"required": 0,
+			"display_format": "H:i",
+			"return_format": "H:i"
+		},
+		{
+			"key": "field_tour_details_return_time",
+			"label": "Return time",
+			"name": "tour_return_time",
+			"type": "time_picker",
+			"instructions": "For multi-day tours, refers to the last day.",
+			"required": 0,
+			"display_format": "H:i",
+			"return_format": "H:i"
+		},
+		{
+			"key": "field_tour_details_group_min",
+			"label": "Group size (min)",
+			"name": "tour_group_min",
+			"type": "number",
+			"required": 0,
+			"min": 1,
+			"step": 1
+		},
+		{
+			"key": "field_tour_details_group_max",
+			"label": "Group size (max)",
+			"name": "tour_group_max",
+			"type": "number",
+			"instructions": "Marketing display only \u2014 not booking capacity.",
+			"required": 1,
+			"min": 1,
+			"step": 1
+		},
+		{
+			"key": "field_tour_details_difficulty",
+			"label": "Difficulty",
+			"name": "tour_difficulty",
+			"type": "select",
+			"required": 1,
+			"choices": {
+				"easy": "Easy",
+				"moderate": "Moderate",
+				"challenging": "Challenging"
+			},
+			"default_value": "easy",
+			"allow_null": 0,
+			"multiple": 0,
+			"ui": 1
+		},
+		{
+			"key": "field_tour_details_min_age",
+			"label": "Minimum age",
+			"name": "tour_min_age",
+			"type": "number",
+			"required": 0,
+			"min": 0,
+			"step": 1
+		},
+		{
+			"key": "field_tour_details_max_age",
+			"label": "Maximum age",
+			"name": "tour_max_age",
+			"type": "number",
+			"required": 0,
+			"min": 0,
+			"step": 1
+		},
+		{
+			"key": "field_tour_details_guide_languages",
+			"label": "Guide languages",
+			"name": "tour_guide_languages",
+			"type": "checkbox",
+			"instructions": "Which languages the tour is conducted in (independent of site UI language).",
+			"required": 0,
+			"choices": {
+				"pl": "Polish",
+				"en": "English",
+				"ru": "Russian",
+				"uk": "Ukrainian"
+			},
+			"layout": "horizontal",
+			"return_format": "value"
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "post_type",
+				"operator": "==",
+				"value": "tour"
+			}
+		]
+	],
+	"menu_order": 2,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"show_in_rest": 1
+}

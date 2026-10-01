@@ -8,8 +8,14 @@
  * save into this plugin (git-tracked) instead of into wp-content/uploads
  * (SCF/ACF's default, which is NOT tracked — see .gitignore).
  *
- * Entirely defensive: every hook here is a no-op if Secure Custom Fields
- * (or ACF) is not installed/active, so this plugin never depends on it.
+ * Secure Custom Fields IS a real, required runtime dependency of this
+ * plugin — declared in /composer.json (`wpackagist-plugin/secure-custom-fields`)
+ * and surfaced with an admin notice if missing (src/Fields/dependency-notice.php,
+ * same directory). What's defensive is only this *file's own* hooks: each
+ * one is a no-op if SCF isn't active yet, so requiring this file never
+ * itself causes a fatal error — the dependency is still real, just failed
+ * gracefully, per the same principle TD-11 already applies to vistula-core
+ * itself.
  *
  * @package Vistula_Core
  */

@@ -1,0 +1,106 @@
+{
+	"key": "group_tour_pricing",
+	"title": "Tour \u2014 Pricing",
+	"fields": [
+		{
+			"key": "field_tour_pricing_price_from",
+			"label": "Price (from)",
+			"name": "tour_price_from",
+			"type": "number",
+			"instructions": "Base \u201cfrom\u201d price in PLN (site-wide single currency \u2014 TD-15).",
+			"required": 1,
+			"min": 0,
+			"step": "0.01",
+			"append": "PLN"
+		},
+		{
+			"key": "field_tour_pricing_price_type",
+			"label": "Price type",
+			"name": "tour_price_type",
+			"type": "select",
+			"instructions": "",
+			"required": 1,
+			"choices": {
+				"per_person": "Per person",
+				"per_group": "Per group"
+			},
+			"default_value": "per_person",
+			"allow_null": 0,
+			"multiple": 0,
+			"ui": 1
+		},
+		{
+			"key": "field_tour_pricing_price_child",
+			"label": "Child price",
+			"name": "tour_price_child",
+			"type": "number",
+			"instructions": "Optional.",
+			"required": 0,
+			"min": 0,
+			"step": "0.01",
+			"append": "PLN"
+		},
+		{
+			"key": "field_tour_pricing_child_age_note",
+			"label": "Child price applies to",
+			"name": "tour_child_age_note",
+			"type": "text",
+			"instructions": "e.g. \u201cAges 4\u201312\u201d.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_tour_pricing_price_child",
+						"operator": "!=empty"
+					}
+				]
+			]
+		},
+		{
+			"key": "field_tour_pricing_price_private",
+			"label": "Private-tour price",
+			"name": "tour_price_private",
+			"type": "number",
+			"instructions": "Optional.",
+			"required": 0,
+			"min": 0,
+			"step": "0.01",
+			"append": "PLN"
+		},
+		{
+			"key": "field_tour_pricing_private_group_max",
+			"label": "Private price covers up to",
+			"name": "tour_private_group_max",
+			"type": "number",
+			"instructions": "Only meaningful if a private price is set.",
+			"required": 0,
+			"min": 1,
+			"step": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_tour_pricing_price_private",
+						"operator": "!=empty"
+					}
+				]
+			]
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "post_type",
+				"operator": "==",
+				"value": "tour"
+			}
+		]
+	],
+	"menu_order": 1,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"show_in_rest": 1
+}

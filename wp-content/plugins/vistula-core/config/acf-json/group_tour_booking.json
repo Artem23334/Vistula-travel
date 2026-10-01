@@ -1,0 +1,58 @@
+{
+	"key": "group_tour_booking",
+	"title": "Tour \u2014 Booking",
+	"fields": [
+		{
+			"key": "field_tour_booking_enabled",
+			"label": "Booking enabled",
+			"name": "tour_booking_enabled",
+			"type": "true_false",
+			"instructions": "Off \u21d2 the tour shows \u201cEnquire\u201d instead of \u201cBook\u201d. No booking system is connected yet (Stage 12).",
+			"required": 0,
+			"default_value": 0,
+			"ui": 1
+		},
+		{
+			"key": "field_tour_booking_provider_ref",
+			"label": "Booking provider reference",
+			"name": "tour_booking_provider_ref",
+			"type": "text",
+			"instructions": "External product/tour ID once a booking provider is connected. Validated by that adapter, not here.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_tour_booking_enabled",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			]
+		},
+		{
+			"key": "field_tour_booking_availability_note",
+			"label": "Availability note",
+			"name": "tour_availability_note",
+			"type": "text",
+			"instructions": "e.g. \u201cSeasonal \u2014 May to September\u201d. Display text only \u2014 not real availability data (that belongs to the future booking system, TD-31).",
+			"required": 0
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "post_type",
+				"operator": "==",
+				"value": "tour"
+			}
+		]
+	],
+	"menu_order": 5,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"show_in_rest": 1
+}

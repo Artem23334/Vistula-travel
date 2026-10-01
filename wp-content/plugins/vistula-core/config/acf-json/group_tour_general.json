@@ -1,0 +1,55 @@
+{
+	"key": "group_tour_general",
+	"title": "Tour \u2014 General",
+	"fields": [
+		{
+			"key": "field_tour_general_hero_image",
+			"label": "Hero image (override)",
+			"name": "tour_hero_image",
+			"type": "image",
+			"instructions": "Optional 16:9 image for the tour's hero. Falls back to the Featured Image if left empty.",
+			"required": 0,
+			"return_format": "id",
+			"preview_size": "medium"
+		},
+		{
+			"key": "field_tour_general_gallery",
+			"label": "Gallery",
+			"name": "tour_gallery",
+			"type": "gallery",
+			"instructions": "4\u201312 images recommended.",
+			"required": 0,
+			"return_format": "id",
+			"min": 0,
+			"max": 12,
+			"preview_size": "thumbnail"
+		},
+		{
+			"key": "field_tour_general_is_popular",
+			"label": "Show in \u201cPopular Tours\u201d",
+			"name": "tour_is_popular",
+			"type": "true_false",
+			"instructions": "Manual selection for the homepage until real booking data exists.",
+			"required": 0,
+			"default_value": 0,
+			"ui": 1
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "post_type",
+				"operator": "==",
+				"value": "tour"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"show_in_rest": 1
+}
